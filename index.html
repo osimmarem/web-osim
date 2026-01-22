@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="id"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>OSIM DIGITAL | Official Site</title> 
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&amp;display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+  <style>
+        :root {
+            --bg-color: #F0F4F8; /* Default Light Mode */
+            --text-color: #0F172A;
+            --accent-color: #1E40AF;
+            --secondary-bg: #FFFFFF;
+            --nav-bg: rgba(240, 244, 248, 0.85);
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark-mode {
+            --bg-color: #0A192F; 
+            --text-color: #ffffff;
+            --accent-color: #C5A059; 
+            --secondary-bg: #112240;
+            --nav-bg: rgba(10, 25, 47, 0.85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(30, 64, 175, 0.1);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .theme-btn {
+            background: var(--secondary-bg);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
+        }
+
+        /* --- HAMBURGER --- */
+        .hamburger {
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--text-color);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+        /* --- SIDE MENU (EXTERNAL LINKS) --- */
+        .side-menu {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 100%; height: 100vh;
+            background: var(--bg-color);
+            z-index: 900;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            transition: 0.6s ease-in-out;
+            overflow-y: auto;
+        }
+
+        .side-menu.active { right: 0; }
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            padding: 120px 10% 50px 15%;
+            gap: 20px;
+        }
+
+        .menu-section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            opacity: 0.8;
+        }
+
+        .menu-item {
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: 0.3s;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .menu-item:hover {
+            background: rgba(30, 64, 175, 0.1);
+            transform: translateX(10px);
+        }
+
+        .menu-item i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            width: 40px;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .menu-text h2 { font-size: 1.6rem; font-weight: 800; }
+        .menu-text p { font-size: 0.9rem; opacity: 0.6; margin-top: 4px; }
+
+        .menu-extra {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 120px 10% 50px 10%;
+            border-left: 1px solid rgba(30, 64, 175, 0.1);
+        }
+
+        .quote-box {
+            margin: 30px 0;
+            padding: 25px;
+            border-left: 4px solid var(--accent-color);
+            background: var(--secondary-bg);
+            border-radius: 0 15px 15px 0;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 8%;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .hero-title span { color: var(--accent-color); }
+
+        /* --- INFO GRID --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            padding: 100px 8%;
+            background: var(--secondary-bg);
+        }
+
+        .info-card h3 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center; gap: 10px;
+        }
+
+        .info-list { list-style: none; }
+        .info-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .info-list i { color: var(--accent-color); width: 20px; text-align: center; }
+
+        /* --- PAGE CONTENT STYLES --- */
+        .page-content {
+            display: none;
+            min-height: 100vh;
+            padding: 120px 8% 60px;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        /* --- PENGUMUMAN PAGE STYLES --- */
+        .announcement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .announcement-card {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            padding: 25px;
+            transition: var(--transition);
+            border: 1px solid rgba(30, 64, 175, 0.1);
+        }
+
+        .announcement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .announcement-badge {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .announcement-date {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .announcement-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .announcement-content {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .announcement-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(30, 64, 175, 0.1);
+        }
+
+        .announcement-attachment {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        /* --- NOT FOUND CONTENT STYLES --- */
+        .not-found-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .not-found-icon {
+            font-size: 6rem;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+        }
+
+        .not-found-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .not-found-title span {
+            color: var(--accent-color);
+        }
+
+        .not-found-desc {
+            font-size: 1.1rem;
+            max-width: 700px;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* --- PROKER PAGE STYLES --- */
+        .coming-soon {
+            margin-top: 60px;
+            padding: 25px;
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .timeline {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+
+        .timeline li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(30, 64, 175, 0.05);
+        }
+
+        .timeline i {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        /* --- KEGIATAN PAGE STYLES --- */
+        .calendar-placeholder {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 40px;
+            border: 2px dashed rgba(30, 64, 175, 0.3);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(30, 64, 175, 0.2);
+        }
+
+        .month-nav {
+            background: transparent;
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .current-month {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .day-name {
+            font-weight: 600;
+            padding: 12px;
+            color: var(--accent-color);
+            background: rgba(30, 64, 175, 0.1);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .day {
+            padding: 15px 8px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .day.event {
+            background: rgba(30, 64, 175, 0.15);
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .day.event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        /* --- POLLING PAGE STYLES --- */
+        .polling-preview {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .poll-question {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .poll-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .poll-option {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option-radio {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .poll-option.selected .option-radio::after {
+            opacity: 1;
+        }
+
+        .poll-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .stat-item {
+            background: rgba(30, 64, 175, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+
+        /* --- GALERI PAGE STYLES --- */
+        .gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 900px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: var(--secondary-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(240, 244, 248, 0.3));
+        }
+
+        .album-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .album-stat {
+            background: var(--secondary-bg);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        /* --- PROFIL PAGE STYLES --- */
+        .team-structure {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .team-level {
+            background: var(--secondary-bg);
+            padding: 25px;
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .level-title {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .level-members {
+            list-style: none;
+        }
+
+        .level-members li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .member-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(30, 64, 175, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .structure-info {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .structure-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(30, 64, 175, 0.05);
+            border-radius: 8px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 40px 8%;
+            text-align: center;
+            opacity: 0.4;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(30, 64, 175, 0.1);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .side-menu { grid-template-columns: 1fr; }
+            .menu-extra { display: none; }
+            .menu-links { padding: 100px 8%; }
+            .gallery-preview { grid-template-columns: repeat(2, 1fr); }
+            .album-stats { grid-template-columns: repeat(2, 1fr); }
+            .structure-features { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .not-found-icon { font-size: 5rem; }
+            .calendar-grid { gap: 5px; }
+            .day { padding: 12px 5px; font-size: 0.8rem; }
+            .action-buttons { flex-direction: column; width: 100%; }
+            .btn { width: 100%; justify-content: center; }
+            .gallery-preview { grid-template-columns: 1fr; }
+            .album-stats { grid-template-columns: 1fr; }
+            .poll-stats { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 576px) {
+            .team-structure { grid-template-columns: 1fr; }
+            .gallery-preview { grid-template-columns: 1fr; }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <nav> 
+   <div class="logo"> <i class="fas fa-shield-halved" style="color: var(--accent-color);"></i> OSIM DIGITAL 
+   </div> 
+   <div class="nav-controls"> <button class="theme-btn" onclick="toggleTheme()"> <i class="fas fa-moon" id="theme-icon"></i> </button> 
+    <div class="hamburger" onclick="toggleMenu()"> <span></span> <span></span> <span></span> 
+    </div> 
+   </div> 
+  </nav> 
+  <div class="side-menu" id="side-menu"> 
+   <div class="menu-links"> 
+    <div class="menu-section-title">
+     Navigasi Halaman
+    </div> <a href="#" class="menu-item" onclick="showPage('home')"> <i class="fas fa-house"></i> 
+     <div class="menu-text"> 
+      <h2>Beranda</h2> 
+      <p>Kembali ke halaman utama dan ringkasan info</p> 
+     </div> </a> <a href="#" class="menu-item" onclick="showPage('proker')"> <i class="fas fa-list-check"></i> 
+     <div class="menu-text"> 
+      <h2>Program Kerja</h2> 
+      <p>Detail rencana &amp; realisasi kerja OSIM</p> 
+     </div> </a> <a href="#" class="menu-item" onclick="showPage('pengumuman')"> <i class="fas fa-bullhorn"></i> 
+     <div class="menu-text"> 
+      <h2>Pengumuman OSIM</h2> 
+      <p>Informasi resmi dan pengumuman terbaru</p> 
+     </div> </a> <a href="https://arin-ops.github.io/suarakann/" target="_blank" class="menu-item"> <i class="fas fa-comment-dots"></i> 
+     <div class="menu-text"> 
+      <h2>Portal Aspirasi</h2> 
+      <p>Suarakan pendapatmu di platform resmi</p> 
+     </div> </a> 
+    <div class="menu-section-title" style="margin-top: 20px;">
+     Sistem Digital
+    </div> <a href="#" class="menu-item" onclick="showPage('kegiatan')"> <i class="fas fa-calendar-alt"></i> 
+     <div class="menu-text"> 
+      <h2>Kegiatan</h2> 
+      <p>Lihat jadwal agenda mendatang</p> 
+     </div> </a> <a href="#" class="menu-item" onclick="showPage('polling')"> <i class="fas fa-poll"></i> 
+     <div class="menu-text"> 
+      <h2>Polling Siswa</h2> 
+      <p>Ikuti survei dan pemungutan suara resmi</p> 
+     </div> </a> <a href="#" class="menu-item" onclick="showPage('galeri')"> <i class="fas fa-images"></i> 
+     <div class="menu-text"> 
+      <h2>Galeri</h2> 
+      <p>Kumpulan foto dan dokumentasi kegiatan</p> 
+     </div> </a> <a href="#" class="menu-item" onclick="showPage('profil')"> <i class="fas fa-user-friends"></i> 
+     <div class="menu-text"> 
+      <h2>Profil Pengurus</h2> 
+      <p>Daftar lengkap jajaran pengurus OSIM</p> 
+     </div> </a> 
+   </div> 
+   <div class="menu-extra"> 
+    <div class="menu-section-title">
+     Inspirasi
+    </div> 
+    <div class="quote-box"> 
+     <p style="font-style: italic; font-size: 1.1rem; line-height: 1.4;"> "Kepemimpinan adalah kapasitas untuk menerjemahkan visi menjadi kenyataan." </p> 
+     <p style="color: var(--accent-color); margin-top: 15px; font-weight: 800;">— Warren Bennis</p> 
+    </div> 
+    <div class="menu-section-title" style="margin-top: 20px;">
+     Hubungi Kami
+    </div> 
+    <ul class="info-list" style="margin-top: 10px;"> 
+     <li><i class="fas fa-envelope"></i> osim@sekolah.sch.id</li> 
+     <li><i class="fab fa-instagram"></i> @osim_digital</li> 
+     <li><i class="fab fa-tiktok"></i> @osim.resmi</li> 
+     <li><i class="fab fa-whatsapp"></i> +62 812-3456-7890</li> 
+    </ul> 
+   </div> 
+  </div> <!-- HOME PAGE --> 
+  <main id="home-page" class="page-content active"> 
+   <section class="hero"> 
+    <h1 class="hero-title">Mewujudkan<br>Organisasi <span>Modern</span><br>&amp; Akuntabel</h1> 
+    <p style="max-width: 600px; margin-top: 20px; opacity: 0.7; border-left: 3px solid var(--accent-color); padding-left: 20px;"> Pusat informasi resmi, transparansi program kerja, dan wadah aspirasi siswa yang aman secara digital. </p> 
+   </section> 
+   <section class="info-grid"> 
+    <div class="info-card"> 
+     <h3><i class="fas fa-info-circle"></i> Tentang Kami</h3> 
+     <p>Membangun ekosistem OSIM yang modern, transparan, dan akuntabel melalui pemanfaatan teknologi digital.</p> 
+     <ul class="info-list" style="margin-top: 15px;"> 
+      <li><i class="fas fa-map-marker-alt"></i> Sekolah Menengah Atas Negeri 1</li> 
+     </ul> 
+    </div> 
+    <div class="info-card"> 
+     <h3><i class="fas fa-address-book"></i> Hubungi Kami</h3> 
+     <ul class="info-list"> 
+      <li><i class="fas fa-envelope"></i> osim@sekolah.sch.id</li> 
+      <li><i class="fab fa-instagram"></i> @osim_digital</li> 
+      <li><i class="fab fa-tiktok"></i> @osim.resmi</li> 
+      <li><i class="fab fa-whatsapp"></i> +62 812-3456-7890</li> 
+     </ul> 
+    </div> 
+    <div class="info-card"> 
+     <h3><i class="fas fa-cogs"></i> Sistem</h3> 
+     <p>Akses terpusat untuk seluruh layanan digital OSIM.</p> 
+     <p style="color: var(--accent-color); font-weight: 600; margin-top: 10px;"> <i class="fas fa-lock"></i> Akses Terautorisasi </p> 
+    </div> 
+   </section> 
+  </main> <!-- PENGUMUMAN PAGE --> 
+  <div id="pengumuman-page" class="page-content"> 
+   <div class="not-found-container" style="align-items: flex-start; text-align: left;"> 
+    <div style="width: 100%; max-width: 1200px;"> 
+     <div class="not-found-icon" style="margin-bottom: 30px;"> <i class="fas fa-bullhorn"></i> 
+     </div> 
+     <h1 class="not-found-title">Pengumuman <span>OSIM</span></h1> 
+     <p class="not-found-desc" style="text-align: left; margin-bottom: 40px;"> Informasi resmi, pengumuman kegiatan, dan berita terbaru dari OSIM. Pastikan Anda selalu memeriksa halaman ini untuk mendapatkan informasi terkini. </p> 
+     <div class="announcement-grid"> 
+      <div class="announcement-card"> 
+       <div class="announcement-header"> <span class="announcement-badge" style="background: #1E40AF;">Penting</span> <span class="announcement-date">15 Desember 2025</span> 
+       </div> 
+       <h3 class="announcement-title">Pembukaan Pendaftaran Pengurus OSIM Periode 2026/2027</h3> 
+       <p class="announcement-content"> Bagi siswa kelas X dan XI yang berminat menjadi pengurus OSIM periode mendatang, pendaftaran dibuka mulai tanggal 20 Desember 2025 - 15 Januari 2026. Persiapkan diri dengan baik! </p> 
+       <div class="announcement-footer"> 
+        <div class="announcement-attachment"> <i class="fas fa-paperclip"></i> <span>Formulir_Pendaftaran.pdf</span> 
+        </div> <button class="btn" onclick="alert('Formulir pendaftaran akan tersedia pada tanggal 20 Desember 2025')" style="padding: 8px 15px; font-size: 0.9rem;"> Lihat Detail </button> 
+       </div> 
+      </div>
+      </div>
+     </div> 
+    </div> 
+   </div> 
+   <!-- PROKER PAGE --> 
+  <div id="proker-page" class="page-content"> 
+   <div class="not-found-container"> 
+    <div class="not-found-icon"> <i class="fas fa-tasks"></i> 
+    </div> 
+    <h1 class="not-found-title">Program Kerja <span>Segera Hadir</span></h1> 
+    <p class="not-found-desc"> Kami sedang menyusun rencana kerja yang terstruktur dan inovatif untuk periode kepengurusan ini. Program kerja kami akan mencakup berbagai bidang dengan tujuan meningkatkan kualitas kegiatan siswa dan mengembangkan potensi seluruh anggota OSIM. </p> 
+    <div class="action-buttons"> <a href="https://arin-ops.github.io/suarakann/" target="_blank" class="btn btn-outline"> <i class="fas fa-lightbulb"></i> Berikan Saran </a> 
+    </div> 
+    <div class="coming-soon"> 
+     <h3><i class="fas fa-calendar-alt"></i> Timeline Pengembangan</h3> 
+     <ul class="timeline"> 
+      <li><i class="fas fa-search"></i> <strong>Analisis Kebutuhan:</strong> Survei dan identifikasi program prioritas</li> 
+      <li><i class="fas fa-pencil-alt"></i> <strong>Penyusunan Rencana:</strong> Membuat blueprint program kerja detail</li> 
+      <li><i class="fas fa-check-circle"></i> <strong>Validasi:</strong> Presentasi dan persetujuan dari pembina OSIM</li> 
+      <li><i class="fas fa-rocket"></i> <strong>Peluncuran:</strong> Publikasi dan implementasi program kerja</li> 
+     </ul> 
+    </div> 
+   </div> 
+  </div> <!-- KEGIATAN PAGE --> 
+  <div id="kegiatan-page" class="page-content"> 
+   <div class="not-found-container"> 
+    <div class="not-found-icon"> <i class="fas fa-calendar-alt"></i> 
+    </div> 
+    <h1 class="not-found-title">Kalender Kegiatan <span>Dalam Pengembangan</span></h1> 
+    <p class="not-found-desc"> Kami sedang mempersiapkan kalender kegiatan yang interaktif dan informatif. Anda akan dapat melihat semua agenda OSIM, mendaftar acara, dan mengatur pengingat untuk kegiatan yang akan datang. </p> 
+    <div class="calendar-placeholder"> 
+     <div class="calendar-header"> <button class="month-nav"><i class="fas fa-chevron-left"></i></button> 
+      <div class="current-month" id="currentMonth">
+       <!-- Kalender akan diisi otomatis -->
+      </div> <button class="month-nav"><i class="fas fa-chevron-right"></i></button> 
+     </div> 
+     <div class="calendar-grid"> 
+      <div class="day-name">
+       Min
+      </div> 
+      <div class="day-name">
+       Sen
+      </div> 
+      <div class="day-name">
+       Sel
+      </div> 
+      <div class="day-name">
+       Rab
+      </div> 
+      <div class="day-name">
+       Kam
+      </div> 
+      <div class="day-name">
+       Jum
+      </div> 
+      <div class="day-name">
+       Sab
+      </div> 
+      <!-- Calendar days akan digenerate otomatis -->
+     </div> 
+    </div> 
+    <div class="action-buttons"> <button class="btn btn-outline" onclick="alert('Fitur notifikasi akan aktif segera!')"> <i class="fas fa-bell"></i> Aktifkan Pengingat </button> 
+    </div> 
+   </div> 
+  </div> <!-- POLLING PAGE --> 
+  <div id="polling-page" class="page-content"> 
+   <div class="not-found-container"> 
+    <div class="not-found-icon"> <i class="fas fa-poll"></i> 
+    </div> 
+    <h1 class="not-found-title">Sistem Polling <span>Dalam Pengembangan</span></h1> 
+    <p class="not-found-desc"> Platform polling kami sedang dalam tahap pengembangan akhir. Sistem ini akan memungkinkan partisipasi demokratis seluruh siswa dalam survei, pemungutan suara, dan pengambilan keputusan OSIM secara transparan. </p> 
+    <div class="polling-preview"> 
+     <div class="poll-question">
+       Fitur polling akan segera hadir untuk mendengarkan suara Anda! 
+     </div> 
+     <div class="poll-options"> 
+      <div class="poll-option" offclick="selectOption(this, 'Sistem akan tersedia untuk seluruh siswa')"> 
+       <div class="option-radio"></div> 
+       <div>
+        Partisipasi Terbuka untuk Semua Siswa
+       </div> 
+      </div> 
+      <div class="poll-option" offclick="selectOption(this, 'Hasil polling akan ditampilkan secara transparan')"> 
+       <div class="option-radio"></div> 
+       <div>
+        Hasil Real-time yang Transparan
+       </div> 
+      </div> 
+      <div class="poll-option" offclick="selectOption(this, 'Polling akan diadakan secara berkala')"> 
+       <div class="option-radio"></div> 
+       <div>
+        Jadwal Polling Berkala
+       </div> 
+      </div> 
+      <div class="poll-option" offclick="selectOption(this, 'Topik polling berdasarkan aspirasi siswa')"> 
+       <div class="option-radio"></div> 
+       <div>
+        Topik Berdasarkan Aspirasi Siswa
+       </div> 
+      </div> 
+     </div> 
+     <div class="poll-stats"> 
+      <div class="stat-item"> 
+       <div class="stat-number">
+        0
+       </div> 
+       <div class="stat-label">
+        Polling Aktif
+       </div> 
+      </div> 
+      <div class="stat-item"> 
+       <div class="stat-number">
+        0
+       </div> 
+       <div class="stat-label">
+        Total Partisipasi
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="action-buttons"> <a href="https://arin-ops.github.io/suarakann/" target="_blank" class="btn btn-outline"> <i class="fas fa-comment-dots"></i> Berikan Aspirasi </a> 
+    </div> 
+   </div> 
+  </div> <!-- GALERI PAGE --> 
+  <div id="galeri-page" class="page-content"> 
+   <div class="not-found-container"> 
+    <div class="not-found-icon"> <i class="fas fa-images"></i> 
+    </div> 
+    <h1 class="not-found-title">Galeri Digital <span>Segera Hadir</span></h1> 
+    <p class="not-found-desc"> Kami sedang mengumpulkan dan mengorganisir momen-momen terbaik dari berbagai kegiatan OSIM. Galeri digital ini akan menjadi arsip visual yang lengkap untuk dokumentasi dan kenangan. </p> 
+    <div class="gallery-preview"> 
+     <div class="gallery-item"> 
+      <div class="gallery-placeholder"> <i class="fas fa-camera"></i> <small>Kegiatan OSIM</small> 
+      </div> 
+     </div> 
+     <div class="gallery-item"> 
+      <div class="gallery-placeholder"> <i class="fas fa-users"></i> <small>Team Building</small> 
+      </div> 
+     </div> 
+     <div class="gallery-item"> 
+      <div class="gallery-placeholder"> <i class="fas fa-trophy"></i> <small>Prestasi</small> 
+      </div> 
+     </div> 
+     <div class="gallery-item"> 
+      <div class="gallery-placeholder"> <i class="fas fa-graduation-cap"></i> <small>Pelatihan</small> 
+      </div> 
+     </div> 
+     <div class="gallery-item"> 
+      <div class="gallery-placeholder"> <i class="fas fa-tree"></i> <small>Lingkungan</small> 
+      </div> 
+     </div> 
+     <div class="gallery-item"> 
+      <div class="gallery-placeholder"> <i class="fas fa-star"></i> <small>Momen Spesial</small> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="album-stats"> 
+     <div class="album-stat"> <i class="fas fa-folder"></i> 
+      <div class="album-count">
+       0
+      </div> 
+      <div class="album-label">
+       Album
+      </div> 
+     </div> 
+     <div class="album-stat"> <i class="fas fa-image"></i> 
+      <div class="album-count">
+       0
+      </div> 
+      <div class="album-label">
+       Foto
+      </div> 
+     </div> 
+     <div class="album-stat"> <i class="fas fa-video"></i> 
+      <div class="album-count">
+       0
+      </div> 
+      <div class="album-label">
+       Video
+      </div> 
+     </div> 
+     <div class="album-stat"> <i class="fas fa-eye"></i> 
+      <div class="album-count">
+       0
+      </div> 
+      <div class="album-label">
+       Dilihat
+      </div> 
+     </div> 
+    </div> 
+    <div class="action-buttons"> <button class="btn btn-outline" onclick="alert('Galeri akan menampilkan dokumentasi kegiatan OSIM yang diupload oleh admin.')"> <i class="fas fa-images"></i> Jelajahi Galeri </button> 
+    </div> 
+   </div> 
+  </div> <!-- PROFIL PAGE --> 
+  <div id="profil-page" class="page-content"> 
+   <div class="not-found-container"> 
+    <div class="not-found-icon"> <i class="fas fa-user-friends"></i> 
+    </div> 
+    <h1 class="not-found-title">Profil Pengurus <span>Segera Lengkap</span></h1> 
+    <p class="not-found-desc"> Kami sedang mempersiapkan profil lengkap seluruh pengurus OSIM periode 2025/2026. Halaman ini akan menampilkan struktur organisasi, biodata, dan kontak masing-masing pengurus. </p> 
+    <div class="team-structure"> 
+     <div class="team-level"> 
+      <div class="level-title"> <i class="fas fa-crown"></i> Pengurus Inti 
+      </div> 
+      <ul class="level-members"> 
+       <li> 
+        <div class="member-avatar"> <i class="fas fa-user"></i> 
+        </div> 
+        <div class="member-info"> 
+         <div class="member-name">
+          Sedang Diproses
+         </div> 
+         <div class="member-role">
+          Ketua OSIM
+         </div> 
+        </div> </li> 
+       <li> 
+        <div class="member-avatar"> <i class="fas fa-user"></i> 
+        </div> 
+        <div class="member-info"> 
+         <div class="member-name">
+          Segera Diumumkan
+         </div> 
+         <div class="member-role">
+          Wakil Ketua
+         </div> 
+        </div> </li> 
+      </ul> 
+     </div> 
+     <div class="team-level"> 
+      <div class="level-title"> <i class="fas fa-users"></i> Bidang Khusus 
+      </div> 
+      <ul class="level-members"> 
+       <li> 
+        <div class="member-avatar"> <i class="fas fa-pencil-alt"></i> 
+        </div> 
+        <div class="member-info"> 
+         <div class="member-name">
+          Dalam Seleksi
+         </div> 
+         <div class="member-role">
+          Sekretaris &amp; Bendahara
+         </div> 
+        </div> </li> 
+       <li> 
+        <div class="member-avatar"> <i class="fas fa-bullhorn"></i> 
+        </div> 
+        <div class="member-info"> 
+         <div class="member-name">
+          Proses Rekrutmen
+         </div> 
+         <div class="member-role">
+          Humas &amp; Publikasi
+         </div> 
+        </div> </li> 
+      </ul> 
+     </div> 
+     <div class="team-level"> 
+      <div class="level-title"> <i class="fas fa-star"></i> Divisi 
+      </div> 
+      <ul class="level-members"> 
+       <li> 
+        <div class="member-avatar"> <i class="fas fa-palette"></i> 
+        </div> 
+        <div class="member-info"> 
+         <div class="member-name">
+          Akan Ditentukan
+         </div> 
+         <div class="member-role">
+          Divisi Kreatif
+         </div> 
+        </div> </li> 
+       <li> 
+        <div class="member-avatar"> <i class="fas fa-calendar-check"></i> 
+        </div> 
+        <div class="member-info"> 
+         <div class="member-name">
+          Dalam Pembentukan
+         </div> 
+         <div class="member-role">
+          Divisi Acara
+         </div> 
+        </div> </li> 
+      </ul> 
+     </div> 
+    </div> 
+    <div class="structure-info"> 
+     <h3>Fitur Profil Pengurus yang Akan Hadir</h3> 
+     <div class="structure-features"> 
+      <div class="feature"> <i class="fas fa-id-card"></i> 
+       <div> <strong>Biodata Lengkap</strong> 
+        <div style="font-size: 0.9rem; opacity: 0.8;">
+         Foto, kelas, dan kontak
+        </div> 
+       </div> 
+      </div> 
+      <div class="feature"> <i class="fas fa-tasks"></i> 
+       <div> <strong>Tugas &amp; Tanggung Jawab</strong> 
+        <div style="font-size: 0.9rem; opacity: 0.8;">
+         Detail peran masing-masing
+        </div> 
+       </div> 
+      </div> 
+      <div class="feature"> <i class="fas fa-envelope"></i> 
+       <div> <strong>Kontak Langsung</strong> 
+        <div style="font-size: 0.9rem; opacity: 0.8;">
+         Email &amp; media sosial
+        </div> 
+       </div> 
+      </div> 
+      <div class="feature"> <i class="fas fa-chart-line"></i> 
+       <div> <strong>Pencapaian</strong> 
+        <div style="font-size: 0.9rem; opacity: 0.8;">
+         Proyek dan kontribusi
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="action-buttons"> <button class="btn btn-outline" onclick="alert('Pengumuman seleksi pengurus akan segera dibuka!')"> <i class="fas fa-user-plus"></i> Info Rekrutmen </button> 
+    </div> 
+   </div> 
+  </div> 
+  <footer>
+    © 2026 OSIM DIGITAL. Hak Cipta Dilindungi. 
+  </footer> 
+  <script>
+        // Load saved theme from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load theme preference
+            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                body.classList.remove('dark-mode');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+            
+            // Set default page to home
+            showPage('home');
+            
+            // Inisialisasi kalender jika di halaman kegiatan
+            if (document.getElementById('kegiatan-page').classList.contains('active')) {
+                updateCalendarForever();
+                renderCalendarDays();
+            }
+        });
+
+        // Toggle Menu Function
+        function toggleMenu() {
+            const menu = document.getElementById('side-menu');
+            const hamburger = document.querySelector('.hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            
+            if (menu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Toggle Theme Function with localStorage
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            
+            // Toggle dark mode
+            body.classList.toggle('dark-mode');
+            
+            // Update icon and save preference
+            if(body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Show Page Function
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const selectedPage = document.getElementById(pageName + '-page');
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+            
+            // Update page title
+            if (pageName === 'home') {
+                document.title = 'OSIM DIGITAL | Official Site';
+            } else {
+                document.title = getPageTitle(pageName) + ' | OSIM DIGITAL';
+            }
+            
+            // Jika halaman kegiatan, update kalender
+            if (pageName === 'kegiatan') {
+                setTimeout(() => {
+                    updateCalendarForever();
+                    renderCalendarDays();
+                }, 100);
+            }
+            
+            // Close menu if open
+            const menu = document.getElementById('side-menu');
+            const hamburger = document.querySelector('.hamburger');
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                hamburger.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Get Page Title
+        function getPageTitle(pageName) {
+            const titles = {
+                'home': 'Beranda',
+                'proker': 'Program Kerja',
+                'pengumuman': 'Pengumuman OSIM',
+                'kegiatan': 'Kegiatan',
+                'polling': 'Polling Siswa',
+                'galeri': 'Galeri',
+                'profil': 'Profil Pengurus'
+            };
+            return titles[pageName] || 'Halaman';
+        }
+
+        // Select Option in Polling
+        function selectOption(element, message) {
+            document.querySelectorAll('.poll-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            setTimeout(() => {
+                alert('Fitur polling masih dalam pengembangan. ' + message);
+            }, 300);
+        }
+
+        // ========== KALENDER DINAMIS ==========
+        // Fungsi update bulan dan tahun otomatis
+        function updateCalendarForever() {
+            const now = new Date();
+            const options = { 
+                month: 'long', 
+                year: 'numeric',
+                timeZone: 'Asia/Jakarta'
+            };
+            
+            try {
+                // Metode modern
+                const formatter = new Intl.DateTimeFormat('id-ID', options);
+                const monthElement = document.getElementById('currentMonth');
+                if (monthElement) {
+                    monthElement.textContent = formatter.format(now);
+                }
+            } catch (e) {
+                // Fallback jika browser lama
+                const months = [
+                    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+                ];
+                const monthElement = document.getElementById('currentMonth');
+                if (monthElement) {
+                    monthElement.textContent = `${months[now.getMonth()]} ${now.getFullYear()}`;
+                }
+            }
+            
+            // Auto-update setiap jam (untuk pastikan selalu update)
+            setTimeout(updateCalendarForever, 3600000);
+        }
+
+        // Fungsi untuk merender hari-hari dalam kalender
+        function renderCalendarDays() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth(); // 0-11
+            const currentDay = now.getDate();
+            
+            // Hitung hari dalam bulan
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            // Hari pertama bulan ini (0=Minggu, 1=Senin, dst)
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            
+            const calendarGrid = document.querySelector('.calendar-grid');
+            if (!calendarGrid) return;
+            
+            // Kosongkan grid kecuali header hari
+            const dayNames = calendarGrid.querySelectorAll('.day-name');
+            calendarGrid.innerHTML = '';
+            dayNames.forEach(dayName => {
+                calendarGrid.appendChild(dayName);
+            });
+            
+            // Tambahkan hari kosong untuk minggu pertama
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'day';
+                emptyDay.textContent = '';
+                calendarGrid.appendChild(emptyDay);
+            }
+            
+            // Tambahkan hari-hari dalam bulan
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day';
+                dayElement.textContent = day;
+                
+                // Tandai hari ini
+                if (day === currentDay) {
+                    dayElement.style.background = 'rgba(30, 64, 175, 0.2)';
+                    dayElement.style.fontWeight = 'bold';
+                }
+                
+                // Tandai event (contoh: tanggal 5, 15, 25)
+                if (day === 5 || day === 15 || day === 25) {
+                    dayElement.classList.add('event');
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        // Calendar navigation simulation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.month-nav').forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Navigasi kalender dinamis sudah aktif! Kalender sekarang selalu menunjukkan bulan dan tahun saat ini.');
+                });
+            });
+            
+            // Gallery item click simulation
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    alert('Galeri lengkap akan segera tersedia dengan dokumentasi kegiatan OSIM!');
+                });
+            });
+            
+            // Team member click simulation
+            document.querySelectorAll('.level-members li').forEach(member => {
+                member.addEventListener('click', function() {
+                    alert('Profil lengkap akan tersedia setelah pengurus terpilih diumumkan!');
+                });
+            });
+        });
+</script> <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCIeYCPF998OCLt5jwIQ8V05tK8LMMv87o",
+        authDomain: "web-osim.firebaseapp.com",
+        projectId: "web-osim",
+        storageBucket: "web-osim.firebasestorage.app",
+        messagingSenderId: "302803933666",
+        appId: "1:302803933666:web:aefafff8d9a555e80e41bb",
+        measurementId: "G-10DRSBPFR4"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script> 
+</body>
+</html>
