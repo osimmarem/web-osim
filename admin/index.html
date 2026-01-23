@@ -7,11 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&amp;display=swap" rel="stylesheet"> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
   <!-- FIREBASE SDK -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
-  <style>
+  <!-- GANTI INI di adminweb.html -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
     /* STYLE CSS TIDAK DIUBAH - SAMA PERSIS */
     :root {
       --bg-color: #F0F4F8;
@@ -988,10 +988,11 @@
 
 <script>
 // ==================== INISIALISASI FIREBASE ====================
+// ==================== INISIALISASI FIREBASE ====================
 let auth, db; // Deklarasi global
 
 // Tunggu Firebase SDK siap
-function initializeFirebase() {
+async function initializeFirebase() {
   try {
     // Konfigurasi Firebase
     const firebaseConfig = {
@@ -1005,17 +1006,30 @@ function initializeFirebase() {
     };
 
     // Inisialisasi Firebase
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    
     auth = firebase.auth();
     db = firebase.firestore();
     
-    console.log("Firebase berhasil diinisialisasi");
+    console.log("Firebase initialized");
     
-    // Setup auth state listener setelah Firebase siap
-    setupAuthListener();
+    // Tunggu Firebase siap
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Cek login state
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log("User logged in:", user.email);
+        showDashboard();
+      } else {
+        console.log("No user logged in");
+      }
+    });
     
   } catch (error) {
-    console.error("Error inisialisasi Firebase:", error);
+    console.error("Firebase init error:", error);
     showAlert('error', 'Gagal menghubungkan ke database. Gunakan login lokal.');
     
     // Fallback ke login lokal
@@ -1043,6 +1057,19 @@ function setupAuthListener() {
       // User logged out
     }
   });
+}
+
+// Fungsi untuk menampilkan dashboard
+function showDashboard() {
+  document.getElementById('login-page').style.display = 'none';
+  document.getElementById('admin-dashboard').style.display = 'flex';
+  
+  const now = new Date();
+  localStorage.setItem('lastLogin', now.toISOString());
+  document.getElementById('last-login').textContent = 'Last login: ' + now.toLocaleString('id-ID');
+  
+  loadData();
+  updateDashboardStats();
 }
 
 // ==================== DATA STORAGE ====================
