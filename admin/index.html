@@ -1,18 +1,19 @@
+
 <!doctype html>
-<html lang="id"> 
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Panel Admin OSIM</title> 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&amp;display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin OSIM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <!-- FIREBASE SDK -->
-  <!-- GANTI INI di adminweb.html -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
-    /* STYLE CSS TIDAK DIUBAH - SAMA PERSIS */
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
+  <style>
+    /* STYLE CSS */
     :root {
       --bg-color: #F0F4F8;
       --text-color: #0F172A;
@@ -521,620 +522,531 @@
         flex-direction: column;
       }
     }
-  </style> 
- </head> 
- <body> 
+  </style>
+</head>
+<body>
   <!-- LOGIN PAGE -->
-  <div id="login-page" class="login-container"> 
-   <div class="login-box"> 
-    <div class="login-logo"> 
-     <h1><i class="fas fa-shield-alt"></i> Login Admin OSIM</h1> 
-    </div> 
-    <div class="form-group"> 
-     <label class="form-label">Username</label> 
-     <input type="text" class="form-control" id="username" placeholder="Masukkan username"> 
-     <div class="error-message" id="username-error"></div> 
-    </div> 
-    <div class="form-group"> 
-     <label class="form-label">Password</label> 
-     <input type="password" class="form-control" id="password" placeholder="Masukkan password"> 
-     <div class="error-message" id="password-error"></div> 
-    </div> 
-    <button class="btn btn-primary" id="login-btn"> 
-     <i class="fas fa-sign-in-alt"></i> Login 
-    </button> 
-    <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.7;"> 
-     <p>Default: admin / admin123</p> 
-    </div> 
-   </div> 
-  </div> 
+  <div id="login-page" class="login-container">
+    <div class="login-box">
+      <div class="login-logo">
+        <h1><i class="fas fa-shield-alt"></i> Login Admin OSIM</h1>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Masukkan username">
+        <div class="error-message" id="username-error"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Masukkan password">
+        <div class="error-message" id="password-error"></div>
+      </div>
+      <button class="btn btn-primary" id="login-btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+        <p>Default: admin / admin123</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ADMIN DASHBOARD (HIDDEN AWAL) -->
-  <div id="admin-dashboard" class="admin-container" style="display: none;"> 
-   <!-- SIDEBAR -->
-   <div class="sidebar"> 
-    <div class="admin-logo"> 
-     <h1><i class="fas fa-shield-alt"></i> Panel Admin OSIM</h1> 
-    </div> 
-    <ul class="admin-menu"> 
-     <li>
-      <div class="menu-item active" data-section="dashboard"> 
-       <i class="fas fa-chart-line"></i> Dashboard 
+  <div id="admin-dashboard" class="admin-container" style="display: none;">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="admin-logo">
+        <h1><i class="fas fa-shield-alt"></i> Panel Admin OSIM</h1>
       </div>
-     </li> 
-     <li>
-      <div class="menu-item" data-section="pengumuman"> 
-       <i class="fas fa-bullhorn"></i> Pengumuman 
+      <ul class="admin-menu">
+        <li>
+          <div class="menu-item active" data-section="dashboard">
+            <i class="fas fa-chart-line"></i> Dashboard
+          </div>
+        </li>
+        <li>
+          <div class="menu-item" data-section="pengumuman">
+            <i class="fas fa-bullhorn"></i> Pengumuman
+          </div>
+        </li>
+        <li>
+          <div class="menu-item" data-section="proker">
+            <i class="fas fa-tasks"></i> Program Kerja
+          </div>
+        </li>
+        <li>
+          <div class="menu-item" data-section="kegiatan">
+            <i class="fas fa-calendar-alt"></i> Kegiatan
+          </div>
+        </li>
+        <li>
+          <div class="menu-item" data-section="galeri">
+            <i class="fas fa-images"></i> Galeri
+          </div>
+        </li>
+        <li>
+          <div class="menu-item" data-section="profil">
+            <i class="fas fa-users"></i> Profil Pengurus
+          </div>
+        </li>
+      </ul>
+      <div style="padding: 20px; border-top: 1px solid rgba(30, 64, 175, 0.1); margin-top: auto;">
+        <div style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 5px;">
+          <i class="fas fa-user-circle"></i> Admin
+        </div>
+        <div style="font-size: 0.7rem; opacity: 0.5;" id="last-login">
+          Last login: -
+        </div>
       </div>
-     </li> 
-     <li>
-      <div class="menu-item" data-section="proker"> 
-       <i class="fas fa-tasks"></i> Program Kerja 
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- HEADER -->
+      <div class="admin-header">
+        <h1 class="page-title" id="page-title">Dashboard</h1>
+        <a href="#" class="logout-btn" id="logout-btn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
       </div>
-     </li> 
-     <li>
-      <div class="menu-item" data-section="kegiatan"> 
-       <i class="fas fa-calendar-alt"></i> Kegiatan 
+
+      <!-- ALERT -->
+      <div class="alert" id="admin-alert"></div>
+
+      <!-- DASHBOARD SECTION -->
+      <div id="dashboard-section" class="admin-section">
+        <h2 class="section-title"><i class="fas fa-chart-bar"></i> Ringkasan Statistik</h2>
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <div class="stat-label">
+              <i class="fas fa-bullhorn" style="color: #1E40AF;"></i> Total Pengumuman
+            </div>
+            <div class="stat-value" id="stat-pengumuman">0</div>
+            <div class="stat-label">
+              Published: <span id="stat-published">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">
+              <i class="fas fa-tasks" style="color: #059669;"></i> Program Aktif
+            </div>
+            <div class="stat-value" id="stat-proker">0</div>
+            <div class="stat-label">
+              Selesai: <span id="stat-proker-selesai">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">
+              <i class="fas fa-calendar" style="color: #7C3AED;"></i> Kegiatan Mendatang
+            </div>
+            <div class="stat-value" id="stat-kegiatan">0</div>
+            <div class="stat-label">
+              7 hari ke depan
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">
+              <i class="fas fa-images" style="color: #DC2626;"></i> Total Foto
+            </div>
+            <div class="stat-value" id="stat-foto">0</div>
+            <div class="stat-label">
+              Album: <span id="stat-album">0</span>
+            </div>
+          </div>
+        </div>
       </div>
-     </li> 
-     <li>
-      <div class="menu-item" data-section="galeri"> 
-       <i class="fas fa-images"></i> Galeri 
+
+      <!-- PENGUMUMAN SECTION -->
+      <div id="pengumuman-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-plus-circle"></i> Tambah Pengumuman Baru</h2>
+        <input type="hidden" id="edit-pengumuman-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Judul Pengumuman</label>
+            <input type="text" class="form-control" id="pengumuman-judul" placeholder="Masukkan judul">
+            <div class="error-message" id="judul-error"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jenis Pengumuman</label>
+            <select class="form-control" id="pengumuman-jenis">
+              <option value="Penting">Penting</option>
+              <option value="Info">Info</option>
+              <option value="Darurat">Darurat</option>
+              <option value="Acara">Acara</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tanggal</label>
+            <input type="date" class="form-control" id="pengumuman-tanggal">
+            <div class="error-message" id="tanggal-error"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select class="form-control" id="pengumuman-status">
+              <option value="published">Published</option>
+              <option value="draft">Draft</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Isi Pengumuman</label>
+          <textarea class="form-control" id="pengumuman-isi" rows="5" placeholder="Tulis isi pengumuman..."></textarea>
+          <div class="error-message" id="isi-error"></div>
+          <div style="text-align: right; margin-top: 5px;">
+            <small style="opacity: 0.7;" id="char-count">0 karakter</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lampiran (opsional)</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" class="form-control" id="pengumuman-lampiran" placeholder="Link/file">
+            <button type="button" class="btn btn-outline" onclick="document.getElementById('file-upload').click()">
+              <i class="fas fa-upload"></i> Upload
+            </button>
+          </div>
+          <input type="file" id="file-upload" style="display: none;">
+        </div>
+        <div style="display: flex; gap: 15px; margin-top: 30px;">
+          <button class="btn btn-primary" id="simpan-pengumuman">
+            <i class="fas fa-save"></i> Simpan Pengumuman
+          </button>
+          <button class="btn btn-outline" onclick="clearPengumumanForm()">
+            <i class="fas fa-redo"></i> Reset
+          </button>
+          <button class="btn btn-danger" id="cancel-edit" style="display: none;">
+            <i class="fas fa-times"></i> Batal Edit
+          </button>
+        </div>
       </div>
-     </li> 
-     <li>
-      <div class="menu-item" data-section="profil"> 
-       <i class="fas fa-users"></i> Profil Pengurus 
+
+      <!-- PREVIEW PENGUMUMAN -->
+      <div class="admin-section" id="preview-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-eye"></i> Preview</h2>
+        <div id="pengumuman-preview" class="announcement-card">
+          <div class="announcement-header">
+            <span class="announcement-badge" id="preview-badge" style="background: #1E40AF;">Penting</span>
+            <span class="announcement-date" id="preview-tanggal">15 Desember 2025</span>
+            <span class="status-badge status-published" id="preview-status">Published</span>
+          </div>
+          <h3 class="announcement-title" id="preview-judul">Judul Pengumuman</h3>
+          <p class="announcement-content" id="preview-isi">Isi pengumuman akan ditampilkan di sini...</p>
+          <div class="announcement-footer" id="preview-lampiran"></div>
+        </div>
       </div>
-     </li> 
-    </ul> 
-    <div style="padding: 20px; border-top: 1px solid rgba(30, 64, 175, 0.1); margin-top: auto;"> 
-     <div style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 5px;"> 
-      <i class="fas fa-user-circle"></i> Admin 
-     </div> 
-     <div style="font-size: 0.7rem; opacity: 0.5;" id="last-login">
-      Last login: - 
-     </div> 
-    </div> 
-   </div> 
 
-   <!-- MAIN CONTENT -->
-   <div class="main-content"> 
-    <!-- HEADER -->
-    <div class="admin-header"> 
-     <h1 class="page-title" id="page-title">Dashboard</h1> 
-     <a href="#" class="logout-btn" id="logout-btn"> 
-      <i class="fas fa-sign-out-alt"></i> Logout 
-     </a> 
-    </div> 
+      <!-- DAFTAR PENGUMUMAN -->
+      <div class="admin-section" id="daftar-pengumuman-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-list"></i> Daftar Pengumuman</h2>
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" class="search-input" id="search-pengumuman" placeholder="Cari pengumuman...">
+        </div>
+        <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+          <button class="btn btn-outline active" onclick="filterPengumuman('all')">Semua</button>
+          <button class="btn btn-outline" onclick="filterPengumuman('published')">Published</button>
+          <button class="btn btn-outline" onclick="filterPengumuman('draft')">Draft</button>
+        </div>
+        <div id="daftar-pengumuman">
+          <!-- Data akan diisi oleh JavaScript -->
+        </div>
+      </div>
 
-    <!-- ALERT -->
-    <div class="alert" id="admin-alert"></div> 
+      <!-- PROGRAM KERJA SECTION -->
+      <div id="proker-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-tasks"></i> Tambah Program Kerja</h2>
+        <input type="hidden" id="edit-proker-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Nama Program</label>
+            <input type="text" class="form-control" id="proker-nama" placeholder="Nama program">
+            <div class="error-message" id="proker-nama-error"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select class="form-control" id="proker-status">
+              <option value="Perencanaan">Perencanaan</option>
+              <option value="Berjalan">Berjalan</option>
+              <option value="Selesai">Selesai</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tanggal Mulai</label>
+            <input type="date" class="form-control" id="proker-mulai">
+            <div class="error-message" id="proker-mulai-error"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tanggal Selesai</label>
+            <input type="date" class="form-control" id="proker-selesai">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Deskripsi Program</label>
+          <textarea class="form-control" id="proker-deskripsi" rows="4" placeholder="Deskripsi program kerja..."></textarea>
+          <div class="error-message" id="proker-deskripsi-error"></div>
+        </div>
+        <div style="display: flex; gap: 15px;">
+          <button class="btn btn-primary" id="simpan-proker">
+            <i class="fas fa-save"></i> Simpan Program Kerja
+          </button>
+          <button class="btn btn-outline" onclick="clearProkerForm()">
+            <i class="fas fa-redo"></i> Reset
+          </button>
+        </div>
+      </div>
 
-    <!-- DASHBOARD SECTION -->
-    <div id="dashboard-section" class="admin-section"> 
-     <h2 class="section-title"><i class="fas fa-chart-bar"></i> Ringkasan Statistik</h2> 
-     <div class="dashboard-stats"> 
-      <div class="stat-card"> 
-       <div class="stat-label">
-        <i class="fas fa-bullhorn" style="color: #1E40AF;"></i> Total Pengumuman
-       </div> 
-       <div class="stat-value" id="stat-pengumuman">
-        0
-       </div> 
-       <div class="stat-label">
-        Published: <span id="stat-published">0</span>
-       </div> 
-      </div> 
-      <div class="stat-card"> 
-       <div class="stat-label">
-        <i class="fas fa-tasks" style="color: #059669;"></i> Program Aktif
-       </div> 
-       <div class="stat-value" id="stat-proker">
-        0
-       </div> 
-       <div class="stat-label">
-        Selesai: <span id="stat-proker-selesai">0</span>
-       </div> 
-      </div> 
-      <div class="stat-card"> 
-       <div class="stat-label">
-        <i class="fas fa-calendar" style="color: #7C3AED;"></i> Kegiatan Mendatang
-       </div> 
-       <div class="stat-value" id="stat-kegiatan">
-        0
-       </div> 
-       <div class="stat-label">
-        7 hari ke depan
-       </div> 
-      </div> 
-      <div class="stat-card"> 
-       <div class="stat-label">
-        <i class="fas fa-images" style="color: #DC2626;"></i> Total Foto
-       </div> 
-       <div class="stat-value" id="stat-foto">
-        0
-       </div> 
-       <div class="stat-label">
-        Album: <span id="stat-album">0</span>
-       </div> 
-      </div> 
-     </div> 
-    </div> 
+      <!-- DAFTAR PROGRAM KERJA -->
+      <div id="daftar-proker-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Daftar Program Kerja</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Nama Program</th>
+              <th>Status</th>
+              <th>Timeline</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="daftar-proker">
+            <!-- Data akan diisi oleh JavaScript -->
+          </tbody>
+        </table>
+      </div>
 
-    <!-- PENGUMUMAN SECTION -->
-    <div id="pengumuman-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-plus-circle"></i> Tambah Pengumuman Baru</h2> 
-     <input type="hidden" id="edit-pengumuman-id"> 
-     <div class="form-grid"> 
-      <div class="form-group"> 
-       <label class="form-label">Judul Pengumuman</label> 
-       <input type="text" class="form-control" id="pengumuman-judul" placeholder="Masukkan judul"> 
-       <div class="error-message" id="judul-error"></div> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Jenis Pengumuman</label> 
-       <select class="form-control" id="pengumuman-jenis"> 
-        <option value="Penting">Penting</option> 
-        <option value="Info">Info</option> 
-        <option value="Darurat">Darurat</option> 
-        <option value="Acara">Acara</option> 
-       </select> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Tanggal</label> 
-       <input type="date" class="form-control" id="pengumuman-tanggal"> 
-       <div class="error-message" id="tanggal-error"></div> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Status</label> 
-       <select class="form-control" id="pengumuman-status"> 
-        <option value="published">Published</option> 
-        <option value="draft">Draft</option> 
-       </select> 
-      </div> 
-     </div> 
-     <div class="form-group"> 
-      <label class="form-label">Isi Pengumuman</label> 
-      <textarea class="form-control" id="pengumuman-isi" rows="5" placeholder="Tulis isi pengumuman..."></textarea> 
-      <div class="error-message" id="isi-error"></div> 
-      <div style="text-align: right; margin-top: 5px;"> 
-       <small style="opacity: 0.7;" id="char-count">0 karakter</small> 
-      </div> 
-     </div> 
-     <div class="form-group"> 
-      <label class="form-label">Lampiran (opsional)</label> 
-      <div style="display: flex; gap: 10px;"> 
-       <input type="text" class="form-control" id="pengumuman-lampiran" placeholder="Link/file"> 
-       <button type="button" class="btn btn-outline" onclick="document.getElementById('file-upload').click()"> 
-        <i class="fas fa-upload"></i> Upload 
-       </button> 
-      </div> 
-      <input type="file" id="file-upload" style="display: none;"> 
-     </div> 
-     <div style="display: flex; gap: 15px; margin-top: 30px;"> 
-      <button class="btn btn-primary" id="simpan-pengumuman"> 
-       <i class="fas fa-save"></i> Simpan Pengumuman 
-      </button> 
-      <button class="btn btn-outline" onclick="clearPengumumanForm()"> 
-       <i class="fas fa-redo"></i> Reset 
-      </button> 
-      <button class="btn btn-danger" id="cancel-edit" style="display: none;"> 
-       <i class="fas fa-times"></i> Batal Edit 
-      </button> 
-     </div> 
-    </div> 
+      <!-- KEGIATAN SECTION -->
+      <div id="kegiatan-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-calendar-plus"></i> Tambah Kegiatan</h2>
+        <input type="hidden" id="edit-kegiatan-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Nama Kegiatan</label>
+            <input type="text" class="form-control" id="kegiatan-nama" placeholder="Nama kegiatan">
+            <div class="error-message" id="kegiatan-nama-error"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tanggal</label>
+            <input type="date" class="form-control" id="kegiatan-tanggal">
+            <div class="error-message" id="kegiatan-tanggal-error"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Lokasi</label>
+            <input type="text" class="form-control" id="kegiatan-lokasi" placeholder="Tempat kegiatan">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Keterangan</label>
+          <textarea class="form-control" id="kegiatan-keterangan" rows="3" placeholder="Keterangan kegiatan..."></textarea>
+        </div>
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="kegiatan-event">
+            <span>Tampilkan di kalender web utama</span>
+          </label>
+        </div>
+        <div style="display: flex; gap: 15px;">
+          <button class="btn btn-primary" id="simpan-kegiatan">
+            <i class="fas fa-save"></i> Simpan Kegiatan
+          </button>
+          <button class="btn btn-outline" onclick="clearKegiatanForm()">
+            <i class="fas fa-redo"></i> Reset
+          </button>
+        </div>
+      </div>
 
-    <!-- PREVIEW PENGUMUMAN -->
-    <div class="admin-section" id="preview-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-eye"></i> Preview</h2> 
-     <div id="pengumuman-preview" class="announcement-card"> 
-      <div class="announcement-header"> 
-       <span class="announcement-badge" id="preview-badge" style="background: #1E40AF;">Penting</span> 
-       <span class="announcement-date" id="preview-tanggal">15 Desember 2025</span> 
-       <span class="status-badge status-published" id="preview-status">Published</span> 
-      </div> 
-      <h3 class="announcement-title" id="preview-judul">Judul Pengumuman</h3> 
-      <p class="announcement-content" id="preview-isi">Isi pengumuman akan ditampilkan di sini...</p> 
-      <div class="announcement-footer" id="preview-lampiran"></div> 
-     </div> 
-    </div> 
+      <!-- DAFTAR KEGIATAN -->
+      <div id="daftar-kegiatan-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-calendar-check"></i> Daftar Kegiatan</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Nama Kegiatan</th>
+              <th>Tanggal</th>
+              <th>Lokasi</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="daftar-kegiatan">
+            <!-- Data akan diisi oleh JavaScript -->
+          </tbody>
+        </table>
+      </div>
 
-    <!-- DAFTAR PENGUMUMAN -->
-    <div class="admin-section" id="daftar-pengumuman-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-list"></i> Daftar Pengumuman</h2> 
-     <div class="search-container"> 
-      <i class="fas fa-search search-icon"></i> 
-      <input type="text" class="search-input" id="search-pengumuman" placeholder="Cari pengumuman..."> 
-     </div> 
-     <div style="margin-bottom: 20px; display: flex; gap: 10px;"> 
-      <button class="btn btn-outline active" onclick="filterPengumuman('all')">Semua</button> 
-      <button class="btn btn-outline" onclick="filterPengumuman('published')">Published</button> 
-      <button class="btn btn-outline" onclick="filterPengumuman('draft')">Draft</button> 
-     </div> 
-     <div id="daftar-pengumuman"> 
-      <!-- Data akan diisi oleh JavaScript --> 
-     </div> 
-    </div> 
+      <!-- GALERI SECTION -->
+      <div id="galeri-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-upload"></i> Upload Foto</h2>
+        <input type="hidden" id="edit-galeri-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Nama Album</label>
+            <input type="text" class="form-control" id="galeri-album" placeholder="Nama album">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kategori</label>
+            <select class="form-control" id="galeri-kategori">
+              <option value="Kegiatan">Kegiatan</option>
+              <option value="Team Building">Team Building</option>
+              <option value="Prestasi">Prestasi</option>
+              <option value="Pelatihan">Pelatihan</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Upload Foto</label>
+          <div class="upload-area" onclick="document.getElementById('galeri-file').click()">
+            <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 15px;"></i>
+            <p>Klik untuk upload foto</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">Format: JPG, PNG, GIF (Max: 5MB)</p>
+          </div>
+          <input type="file" id="galeri-file" accept="image/*" style="display: none;">
+          <div id="image-preview" style="display: none; margin-top: 15px;">
+            <img id="preview-image" style="max-width: 200px; max-height: 200px; border-radius: 8px;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Link Foto (alternatif)</label>
+          <input type="text" class="form-control" id="galeri-link" placeholder="https://example.com/foto.jpg">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Keterangan (opsional)</label>
+          <textarea class="form-control" id="galeri-keterangan" rows="2" placeholder="Deskripsi foto..."></textarea>
+        </div>
+        <button class="btn btn-primary" id="tambah-foto">
+          <i class="fas fa-plus"></i> Tambah ke Galeri
+        </button>
+      </div>
 
-    <!-- PROGRAM KERJA SECTION -->
-    <div id="proker-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-tasks"></i> Tambah Program Kerja</h2> 
-     <input type="hidden" id="edit-proker-id"> 
-     <div class="form-grid"> 
-      <div class="form-group"> 
-       <label class="form-label">Nama Program</label> 
-       <input type="text" class="form-control" id="proker-nama" placeholder="Nama program"> 
-       <div class="error-message" id="proker-nama-error"></div> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Status</label> 
-       <select class="form-control" id="proker-status"> 
-        <option value="Perencanaan">Perencanaan</option> 
-        <option value="Berjalan">Berjalan</option> 
-        <option value="Selesai">Selesai</option> 
-       </select> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Tanggal Mulai</label> 
-       <input type="date" class="form-control" id="proker-mulai"> 
-       <div class="error-message" id="proker-mulai-error"></div> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Tanggal Selesai</label> 
-       <input type="date" class="form-control" id="proker-selesai"> 
-      </div> 
-     </div> 
-     <div class="form-group"> 
-      <label class="form-label">Deskripsi Program</label> 
-      <textarea class="form-control" id="proker-deskripsi" rows="4" placeholder="Deskripsi program kerja..."></textarea> 
-      <div class="error-message" id="proker-deskripsi-error"></div> 
-     </div> 
-     <div style="display: flex; gap: 15px;"> 
-      <button class="btn btn-primary" id="simpan-proker"> 
-       <i class="fas fa-save"></i> Simpan Program Kerja 
-      </button> 
-      <button class="btn btn-outline" onclick="clearProkerForm()"> 
-       <i class="fas fa-redo"></i> Reset 
-      </button> 
-     </div> 
-    </div> 
+      <!-- GALERI FOTO -->
+      <div id="galeri-foto-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-images"></i> Galeri Foto</h2>
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" class="search-input" id="search-galeri" placeholder="Cari foto...">
+        </div>
+        <div class="gallery-grid" id="galeri-foto">
+          <!-- Data akan diisi oleh JavaScript -->
+        </div>
+      </div>
 
-    <!-- DAFTAR PROGRAM KERJA -->
-    <div id="daftar-proker-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Daftar Program Kerja</h2> 
-     <table class="data-table"> 
-      <thead> 
-       <tr> 
-        <th>Nama Program</th> 
-        <th>Status</th> 
-        <th>Timeline</th> 
-        <th>Aksi</th> 
-       </tr> 
-      </thead> 
-      <tbody id="daftar-proker"> 
-       <!-- Data akan diisi oleh JavaScript --> 
-      </tbody> 
-     </table> 
-    </div> 
+      <!-- PROFIL PENGURUS SECTION -->
+      <div id="profil-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-user-plus"></i> Tambah Pengurus</h2>
+        <input type="hidden" id="edit-profil-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" id="profil-nama" placeholder="Nama pengurus">
+            <div class="error-message" id="profil-nama-error"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jabatan</label>
+            <input type="text" class="form-control" id="profil-jabatan" placeholder="Jabatan">
+            <div class="error-message" id="profil-jabatan-error"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Divisi</label>
+            <select class="form-control" id="profil-divisi">
+              <option value="Pengurus Inti">Pengurus Inti</option>
+              <option value="Bidang Khusus">Bidang Khusus</option>
+              <option value="Divisi Kreatif">Divisi Kreatif</option>
+              <option value="Divisi Acara">Divisi Acara</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Upload Foto</label>
+            <input type="file" class="form-control" id="profil-file" accept="image/*">
+            <input type="hidden" id="profil-foto">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kontak (opsional)</label>
+            <input type="text" class="form-control" id="profil-kontak" placeholder="Email/WhatsApp">
+          </div>
+        </div>
+        <div style="display: flex; gap: 15px;">
+          <button class="btn btn-primary" id="tambah-pengurus">
+            <i class="fas fa-save"></i> Simpan Data Pengurus
+          </button>
+          <button class="btn btn-outline" onclick="clearProfilForm()">
+            <i class="fas fa-redo"></i> Reset
+          </button>
+        </div>
+      </div>
 
-    <!-- KEGIATAN SECTION -->
-    <div id="kegiatan-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-calendar-plus"></i> Tambah Kegiatan</h2> 
-     <input type="hidden" id="edit-kegiatan-id"> 
-     <div class="form-grid"> 
-      <div class="form-group"> 
-       <label class="form-label">Nama Kegiatan</label> 
-       <input type="text" class="form-control" id="kegiatan-nama" placeholder="Nama kegiatan"> 
-       <div class="error-message" id="kegiatan-nama-error"></div> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Tanggal</label> 
-       <input type="date" class="form-control" id="kegiatan-tanggal"> 
-       <div class="error-message" id="kegiatan-tanggal-error"></div> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Lokasi</label> 
-       <input type="text" class="form-control" id="kegiatan-lokasi" placeholder="Tempat kegiatan"> 
-      </div> 
-     </div> 
-     <div class="form-group"> 
-      <label class="form-label">Keterangan</label> 
-      <textarea class="form-control" id="kegiatan-keterangan" rows="3" placeholder="Keterangan kegiatan..."></textarea> 
-     </div> 
-     <div class="form-group"> 
-      <label style="display: flex; align-items: center; gap: 10px;"> 
-       <input type="checkbox" id="kegiatan-event"> 
-       <span>Tampilkan di kalender web utama</span> 
-      </label> 
-     </div> 
-     <div style="display: flex; gap: 15px;"> 
-      <button class="btn btn-primary" id="simpan-kegiatan"> 
-       <i class="fas fa-save"></i> Simpan Kegiatan 
-      </button> 
-      <button class="btn btn-outline" onclick="clearKegiatanForm()"> 
-       <i class="fas fa-redo"></i> Reset 
-      </button> 
-     </div> 
-    </div> 
+      <!-- DAFTAR PENGURUS -->
+      <div id="daftar-pengurus-section" class="admin-section" style="display: none;">
+        <h2 class="section-title"><i class="fas fa-users"></i> Daftar Pengurus</h2>
+        <div id="daftar-pengurus">
+          <!-- Data akan diisi oleh JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- DAFTAR KEGIATAN -->
-    <div id="daftar-kegiatan-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-calendar-check"></i> Daftar Kegiatan</h2> 
-     <table class="data-table"> 
-      <thead> 
-       <tr> 
-        <th>Nama Kegiatan</th> 
-        <th>Tanggal</th> 
-        <th>Lokasi</th> 
-        <th>Aksi</th> 
-       </tr> 
-      </thead> 
-      <tbody id="daftar-kegiatan"> 
-       <!-- Data akan diisi oleh JavaScript --> 
-      </tbody> 
-     </table> 
-    </div> 
-
-    <!-- GALERI SECTION -->
-    <div id="galeri-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-upload"></i> Upload Foto</h2> 
-     <input type="hidden" id="edit-galeri-id"> 
-     <div class="form-grid"> 
-      <div class="form-group"> 
-       <label class="form-label">Nama Album</label> 
-       <input type="text" class="form-control" id="galeri-album" placeholder="Nama album"> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Kategori</label> 
-       <select class="form-control" id="galeri-kategori"> 
-        <option value="Kegiatan">Kegiatan</option> 
-        <option value="Team Building">Team Building</option> 
-        <option value="Prestasi">Prestasi</option> 
-        <option value="Pelatihan">Pelatihan</option> 
-       </select> 
-      </div> 
-     </div> 
-     <div class="form-group"> 
-      <label class="form-label">Upload Foto</label> 
-      <div class="upload-area" onclick="document.getElementById('galeri-file').click()"> 
-       <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 15px;"></i> 
-       <p>Klik untuk upload foto</p> 
-       <p style="font-size: 0.8rem; opacity: 0.7;">Format: JPG, PNG, GIF (Max: 5MB)</p> 
-      </div> 
-      <input type="file" id="galeri-file" accept="image/*" style="display: none;"> 
-      <div id="image-preview" style="display: none; margin-top: 15px;"> 
-       <img id="preview-image" style="max-width: 200px; max-height: 200px; border-radius: 8px;"> 
-      </div> 
-     </div> 
-     <div class="form-group"> 
-      <label class="form-label">Link Foto (alternatif)</label> 
-      <input type="text" class="form-control" id="galeri-link" placeholder="https://example.com/foto.jpg"> 
-     </div> 
-     <div class="form-group"> 
-      <label class="form-label">Keterangan (opsional)</label> 
-      <textarea class="form-control" id="galeri-keterangan" rows="2" placeholder="Deskripsi foto..."></textarea> 
-     </div> 
-     <button class="btn btn-primary" id="tambah-foto"> 
-      <i class="fas fa-plus"></i> Tambah ke Galeri 
-     </button> 
-    </div> 
-
-    <!-- GALERI FOTO -->
-    <div id="galeri-foto-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-images"></i> Galeri Foto</h2> 
-     <div class="search-container"> 
-      <i class="fas fa-search search-icon"></i> 
-      <input type="text" class="search-input" id="search-galeri" placeholder="Cari foto..."> 
-     </div> 
-     <div class="gallery-grid" id="galeri-foto"> 
-      <!-- Data akan diisi oleh JavaScript --> 
-     </div> 
-    </div> 
-
-    <!-- PROFIL PENGURUS SECTION -->
-    <div id="profil-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-user-plus"></i> Tambah Pengurus</h2> 
-     <input type="hidden" id="edit-profil-id"> 
-     <div class="form-grid"> 
-      <div class="form-group"> 
-       <label class="form-label">Nama Lengkap</label> 
-       <input type="text" class="form-control" id="profil-nama" placeholder="Nama pengurus"> 
-       <div class="error-message" id="profil-nama-error"></div> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Jabatan</label> 
-       <input type="text" class="form-control" id="profil-jabatan" placeholder="Jabatan"> 
-       <div class="error-message" id="profil-jabatan-error"></div> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Divisi</label> 
-       <select class="form-control" id="profil-divisi"> 
-        <option value="Pengurus Inti">Pengurus Inti</option> 
-        <option value="Bidang Khusus">Bidang Khusus</option> 
-        <option value="Divisi Kreatif">Divisi Kreatif</option> 
-        <option value="Divisi Acara">Divisi Acara</option> 
-       </select> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Upload Foto</label> 
-       <input type="file" class="form-control" id="profil-file" accept="image/*"> 
-       <input type="hidden" id="profil-foto"> 
-      </div> 
-      <div class="form-group"> 
-       <label class="form-label">Kontak (opsional)</label> 
-       <input type="text" class="form-control" id="profil-kontak" placeholder="Email/WhatsApp"> 
-      </div> 
-     </div> 
-     <div style="display: flex; gap: 15px;"> 
-      <button class="btn btn-primary" id="tambah-pengurus"> 
-       <i class="fas fa-save"></i> Simpan Data Pengurus 
-      </button> 
-      <button class="btn btn-outline" onclick="clearProfilForm()"> 
-       <i class="fas fa-redo"></i> Reset 
-      </button> 
-     </div> 
-    </div> 
-
-    <!-- DAFTAR PENGURUS -->
-    <div id="daftar-pengurus-section" class="admin-section" style="display: none;"> 
-     <h2 class="section-title"><i class="fas fa-users"></i> Daftar Pengurus</h2> 
-     <div id="daftar-pengurus"> 
-      <!-- Data akan diisi oleh JavaScript --> 
-     </div> 
-    </div> 
-   </div> 
-  </div> 
-
-<script>
-// ==================== INISIALISASI FIREBASE ====================
-// ==================== INISIALISASI FIREBASE ====================
-let auth, db; // Deklarasi global
-
-// Tunggu Firebase SDK siap
-async function initializeFirebase() {
-  try {
-    // Konfigurasi Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyCIeYCPF998OCLt5jwIQ8V05tK8LMMv87o",
-      authDomain: "web-osim.firebaseapp.com",
-      projectId: "web-osim",
-      storageBucket: "web-osim.firebasestorage.app",
-      messagingSenderId: "302803933666",
-      appId: "1:302803933666:web:aefafff8d9a555e80e41bb",
-      measurementId: "G-10DRSBPFR4"
-    };
-
-    // Inisialisasi Firebase
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
-    
-    auth = firebase.auth();
-    db = firebase.firestore();
-    
-    console.log("Firebase initialized");
-    
-    // Tunggu Firebase siap
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Cek login state
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log("User logged in:", user.email);
-        showDashboard();
-      } else {
-        console.log("No user logged in");
-      }
-    });
-    
-  } catch (error) {
-    console.error("Firebase init error:", error);
-    showAlert('error', 'Gagal menghubungkan ke database. Gunakan login lokal.');
-    
-    // Fallback ke login lokal
-    document.getElementById('login-btn').onclick = loginLocal;
-  }
-}
-
-// Setup auth state listener
-function setupAuthListener() {
-  auth.onAuthStateChanged(function(user) {
-    if (user) {
-      console.log("User logged in:", user.email);
-      // Login berhasil
-      document.getElementById('login-page').style.display = 'none';
-      document.getElementById('admin-dashboard').style.display = 'flex';
-      
-      const now = new Date();
-      localStorage.setItem('lastLogin', now.toISOString());
-      document.getElementById('last-login').textContent = 'Last login: ' + now.toLocaleString('id-ID');
-      
-      loadData();
-      updateDashboardStats();
-    } else {
-      console.log("User logged out");
-      // User logged out
-    }
-  });
-}
-
-// Fungsi untuk menampilkan dashboard
-function showDashboard() {
-  document.getElementById('login-page').style.display = 'none';
-  document.getElementById('admin-dashboard').style.display = 'flex';
-  
-  const now = new Date();
-  localStorage.setItem('lastLogin', now.toISOString());
-  document.getElementById('last-login').textContent = 'Last login: ' + now.toLocaleString('id-ID');
-  
-  loadData();
-  updateDashboardStats();
-}
-
-// ==================== DATA STORAGE ====================
-let osimData = {
-  pengumuman: [],
-  proker: [],
-  kegiatan: [],
-  galeri: [],
-  profil: []
+  <script>
+// ==================== FIREBASE CONFIG ====================
+const firebaseConfig = {
+    apiKey: "AIzaSyCIeYCPF998OCLt5jwIQ8V05tK8LMMv87o",
+    authDomain: "web-osim.firebaseapp.com",
+    projectId: "web-osim",
+    storageBucket: "web-osim.firebasestorage.app",
+    messagingSenderId: "302803933666",
+    appId: "1:302803933666:web:aefafff8d9a555e80e41bb",
+    measurementId: "G-10DRSBPFR4"
 };
 
-let currentEditId = null;
-let currentFilter = 'all';
+// Initialize Firebase
+let db, auth;
 
-// ==================== LOGIN FUNCTION ====================
-// Fungsi login dengan Firebase
-async function loginFirebase() {
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  
-  // Reset errors
-  document.getElementById('username-error').style.display = 'none';
-  document.getElementById('password-error').style.display = 'none';
-  
-  // Validasi
-  let isValid = true;
-  
-  if (!username) {
-    document.getElementById('username-error').textContent = 'Email harus diisi';
-    document.getElementById('username-error').style.display = 'block';
-    document.getElementById('username').classList.add('error');
-    isValid = false;
-  }
-  
-  if (!password) {
-    document.getElementById('password-error').textContent = 'Password harus diisi';
-    document.getElementById('password-error').style.display = 'block';
-    document.getElementById('password').classList.add('error');
-    isValid = false;
-  }
-  
-  if (!isValid) return;
-  
-  try {
-    // Coba login dengan Firebase
-    await auth.signInWithEmailAndPassword(username, password);
-    // Auth state listener akan menangani sisanya
-  } catch (error) {
-    console.error('Firebase login error:', error);
-    
-    // Jika Firebase error, coba login lokal
-    if (username === 'admin' && password === 'admin123') {
-      loginLocal();
-    } else {
-      showAlert('error', 'Login gagal! Coba admin / admin123');
+function initializeFirebase() {
+    try {
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        db = firebase.firestore();
+        auth = firebase.auth();
+        console.log("Firebase initialized successfully!");
+        return true;
+    } catch (error) {
+        console.error("Firebase initialization error:", error);
+        return false;
     }
-  }
 }
 
-// Fungsi login lokal (fallback)
-function loginLocal() {
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  
-  if (username === 'admin' && password === 'admin123') {
+// ==================== SIMPLE LOGIN SYSTEM ====================
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    // Reset errors
+    document.getElementById('username-error').style.display = 'none';
+    document.getElementById('password-error').style.display = 'none';
+    
+    // Validasi input
+    if (!username || !password) {
+        showAlert('error', 'Username dan password harus diisi!');
+        return;
+    }
+    
+    // Hardcode login untuk admin (SEMENTARA)
+    if (username === 'admin' && password === 'admin123') {
+        showDashboard();
+        return;
+    }
+    
+    // Jika bukan admin, coba login Firebase
+    try {
+        auth.signInWithEmailAndPassword(username, password)
+            .then((userCredential) => {
+                console.log("Login Firebase berhasil:", userCredential.user);
+                showDashboard();
+            })
+            .catch((error) => {
+                console.error("Login Firebase gagal:", error);
+                showAlert('error', 'Login gagal! Coba admin / admin123');
+            });
+    } catch (error) {
+        showAlert('error', 'Sistem login error: ' + error.message);
+    }
+}
+
+function showDashboard() {
     document.getElementById('login-page').style.display = 'none';
     document.getElementById('admin-dashboard').style.display = 'flex';
     
@@ -1144,1081 +1056,1054 @@ function loginLocal() {
     
     loadData();
     updateDashboardStats();
-    showAlert('success', 'Login berhasil! (Mode lokal)');
-  } else {
-    showAlert('error', 'Username atau password salah!');
-  }
+    showAlert('success', 'Login berhasil!');
 }
 
-// Fungsi logout
-async function logout() {
-  try {
-    if (auth) {
-      await auth.signOut();
+function logout() {
+    // Reset ke login page
+    document.getElementById('admin-dashboard').style.display = 'none';
+    document.getElementById('login-page').style.display = 'flex';
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    
+    // Clear login state
+    localStorage.removeItem('isLoggedIn');
+    showAlert('success', 'Logout berhasil!');
+}
+
+// ==================== FIREBASE DATA FUNCTIONS ====================
+let osimData = {
+    pengumuman: [],
+    proker: [],
+    kegiatan: [],
+    galeri: [],
+    profil: []
+};
+
+let currentEditId = null;
+let currentFilter = 'all';
+
+// Load data dari Firebase
+async function loadData() {
+    if (!db) {
+        console.error("Firebase not initialized!");
+        return;
     }
-  } catch (error) {
-    console.log('Firebase logout error:', error);
-  }
-  
-  // Reset ke login page
-  document.getElementById('admin-dashboard').style.display = 'none';
-  document.getElementById('login-page').style.display = 'flex';
-  document.getElementById('username').value = '';
-  document.getElementById('password').value = '';
-  showAlert('success', 'Logout berhasil!');
+    
+    try {
+        // Load semua data dari Firebase
+        const [pengumumanSnapshot, prokerSnapshot, kegiatanSnapshot, galeriSnapshot, profilSnapshot] = 
+            await Promise.all([
+                db.collection('pengumuman').get(),
+                db.collection('proker').get(),
+                db.collection('kegiatan').get(),
+                db.collection('galeri').get(),
+                db.collection('profil').get()
+            ]);
+        
+        // Convert ke array
+        osimData.pengumuman = pengumumanSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        osimData.proker = prokerSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        osimData.kegiatan = kegiatanSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        osimData.galeri = galeriSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        osimData.profil = profilSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        console.log("Data loaded from Firebase:", osimData);
+        renderAll();
+        
+    } catch (error) {
+        console.error("Error loading data from Firebase:", error);
+        showAlert('error', 'Gagal memuat data dari server');
+        
+        // Fallback ke localStorage
+        const saved = localStorage.getItem('osimData');
+        if (saved) {
+            try {
+                osimData = JSON.parse(saved);
+                renderAll();
+            } catch (e) {
+                console.error('Error parsing localStorage data:', e);
+            }
+        }
+    }
 }
 
-// ==================== LOAD/SAVE DATA ====================
-function loadData() {
-  const saved = localStorage.getItem('osimData');
-  if (saved) {
-    osimData = JSON.parse(saved);
-  }
-  renderAll();
+// Save data ke Firebase
+async function saveData(type, data) {
+    if (!db) {
+        console.error("Firebase not initialized!");
+        return false;
+    }
+    
+    try {
+        if (data.id && data.id !== 'new') {
+            // Update existing document
+            const { id, ...dataWithoutId } = data;
+            await db.collection(type).doc(id).update(dataWithoutId);
+            console.log(`Updated ${type} with ID: ${id}`);
+        } else {
+            // Add new document
+            const { id, ...dataWithoutId } = data;
+            const docRef = await db.collection(type).add(dataWithoutId);
+            data.id = docRef.id;
+            console.log(`Added ${type} with ID: ${docRef.id}`);
+        }
+        return true;
+    } catch (error) {
+        console.error(`Error saving ${type} to Firebase:`, error);
+        showAlert('error', `Gagal menyimpan ${type} ke server`);
+        return false;
+    }
 }
 
-function saveData() {
-  localStorage.setItem('osimData', JSON.stringify(osimData));
-  renderAll();
-  updateDashboardStats();
-  showAlert('success', 'Data berhasil disimpan!');
+// Delete data dari Firebase
+async function deleteData(type, id) {
+    if (!db) {
+        console.error("Firebase not initialized!");
+        return false;
+    }
+    
+    try {
+        await db.collection(type).doc(id).delete();
+        console.log(`Deleted ${type} with ID: ${id}`);
+        return true;
+    } catch (error) {
+        console.error(`Error deleting ${type} from Firebase:`, error);
+        showAlert('error', `Gagal menghapus ${type} dari server`);
+        return false;
+    }
 }
 
 // ==================== NAVIGASI ====================
 function showSection(section) {
-  // Sembunyikan semua section
-  document.querySelectorAll('.admin-section').forEach(el => {
-    el.style.display = 'none';
-  });
-  
-  // Tampilkan section yang dipilih
-  document.getElementById(section + '-section').style.display = 'block';
-  
-  // Tampilkan section pendukung
-  if (section === 'pengumuman') {
-    document.getElementById('preview-section').style.display = 'block';
-    document.getElementById('daftar-pengumuman-section').style.display = 'block';
-  } else if (section === 'proker') {
-    document.getElementById('daftar-proker-section').style.display = 'block';
-  } else if (section === 'kegiatan') {
-    document.getElementById('daftar-kegiatan-section').style.display = 'block';
-  } else if (section === 'galeri') {
-    document.getElementById('galeri-foto-section').style.display = 'block';
-  } else if (section === 'profil') {
-    document.getElementById('daftar-pengurus-section').style.display = 'block';
-  }
-  
-  // Update menu aktif
-  document.querySelectorAll('.menu-item').forEach(el => {
-    el.classList.remove('active');
-  });
-  event.target.classList.add('active');
-  
-  // Update judul halaman
-  const titles = {
-    'dashboard': 'Dashboard',
-    'pengumuman': 'Pengumuman',
-    'proker': 'Program Kerja',
-    'kegiatan': 'Kegiatan',
-    'galeri': 'Galeri',
-    'profil': 'Profil Pengurus'
-  };
-  document.getElementById('page-title').textContent = titles[section];
+    // Sembunyikan semua section
+    document.querySelectorAll('.admin-section').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    // Tampilkan section yang dipilih
+    document.getElementById(section + '-section').style.display = 'block';
+    
+    // Tampilkan section pendukung
+    if (section === 'pengumuman') {
+        document.getElementById('preview-section').style.display = 'block';
+        document.getElementById('daftar-pengumuman-section').style.display = 'block';
+    } else if (section === 'proker') {
+        document.getElementById('daftar-proker-section').style.display = 'block';
+    } else if (section === 'kegiatan') {
+        document.getElementById('daftar-kegiatan-section').style.display = 'block';
+    } else if (section === 'galeri') {
+        document.getElementById('galeri-foto-section').style.display = 'block';
+    } else if (section === 'profil') {
+        document.getElementById('daftar-pengurus-section').style.display = 'block';
+    }
+    
+    // Update menu aktif
+    document.querySelectorAll('.menu-item').forEach(el => {
+        el.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Update judul halaman
+    const titles = {
+        'dashboard': 'Dashboard',
+        'pengumuman': 'Pengumuman',
+        'proker': 'Program Kerja',
+        'kegiatan': 'Kegiatan',
+        'galeri': 'Galeri',
+        'profil': 'Profil Pengurus'
+    };
+    document.getElementById('page-title').textContent = titles[section];
 }
 
 // ==================== DASHBOARD STATS ====================
 function updateDashboardStats() {
-  const today = new Date().toISOString().split('T')[0];
-  const weekLater = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-  
-  // Update stats
-  document.getElementById('stat-pengumuman').textContent = osimData.pengumuman.length;
-  document.getElementById('stat-published').textContent = osimData.pengumuman.filter(p => p.status === 'published').length;
-  
-  document.getElementById('stat-proker').textContent = osimData.proker.filter(p => p.status === 'Berjalan').length;
-  document.getElementById('stat-proker-selesai').textContent = osimData.proker.filter(p => p.status === 'Selesai').length;
-  
-  document.getElementById('stat-kegiatan').textContent = osimData.kegiatan.filter(k => k.tanggal >= today && k.tanggal <= weekLater).length;
-  
-  document.getElementById('stat-foto').textContent = osimData.galeri.length;
-  
-  const uniqueAlbums = [...new Set(osimData.galeri.map(g => g.album))].length;
-  document.getElementById('stat-album').textContent = uniqueAlbums;
+    const today = new Date().toISOString().split('T')[0];
+    const weekLater = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    
+    // Update stats
+    document.getElementById('stat-pengumuman').textContent = osimData.pengumuman.length;
+    document.getElementById('stat-published').textContent = osimData.pengumuman.filter(p => p.status === 'published').length;
+    
+    document.getElementById('stat-proker').textContent = osimData.proker.filter(p => p.status === 'Berjalan').length;
+    document.getElementById('stat-proker-selesai').textContent = osimData.proker.filter(p => p.status === 'Selesai').length;
+    
+    document.getElementById('stat-kegiatan').textContent = osimData.kegiatan.filter(k => k.tanggal >= today && k.tanggal <= weekLater).length;
+    
+    document.getElementById('stat-foto').textContent = osimData.galeri.length;
+    
+    const uniqueAlbums = [...new Set(osimData.galeri.map(g => g.album))].length;
+    document.getElementById('stat-album').textContent = uniqueAlbums;
 }
 
 // ==================== PENGUMUMAN ====================
 function updatePreview() {
-  const judul = document.getElementById('pengumuman-judul').value || 'Judul Pengumuman';
-  const jenis = document.getElementById('pengumuman-jenis').value;
-  const tanggal = document.getElementById('pengumuman-tanggal').value || new Date().toISOString().split('T')[0];
-  const isi = document.getElementById('pengumuman-isi').value || 'Isi pengumuman akan ditampilkan di sini...';
-  const lampiran = document.getElementById('pengumuman-lampiran').value;
-  const status = document.getElementById('pengumuman-status').value;
-  
-  // Update preview
-  document.getElementById('preview-judul').textContent = judul;
-  document.getElementById('preview-isi').textContent = isi;
-  document.getElementById('preview-tanggal').textContent = formatDate(tanggal);
-  
-  // Update badge
-  const badge = document.getElementById('preview-badge');
-  badge.textContent = jenis;
-  badge.style.background = getBadgeColor(jenis);
-  
-  // Update status
-  const statusBadge = document.getElementById('preview-status');
-  statusBadge.textContent = status === 'published' ? 'Published' : 'Draft';
-  statusBadge.className = `status-badge status-${status}`;
-  
-  // Update lampiran
-  const lampiranDiv = document.getElementById('preview-lampiran');
-  if (lampiran) {
-    lampiranDiv.innerHTML = `
-      <div class="announcement-attachment">
-        <i class="fas fa-paperclip"></i> <span>${lampiran}</span>
-      </div>
-    `;
-  } else {
-    lampiranDiv.innerHTML = '';
-  }
+    const judul = document.getElementById('pengumuman-judul').value || 'Judul Pengumuman';
+    const jenis = document.getElementById('pengumuman-jenis').value;
+    const tanggal = document.getElementById('pengumuman-tanggal').value || new Date().toISOString().split('T')[0];
+    const isi = document.getElementById('pengumuman-isi').value || 'Isi pengumuman akan ditampilkan di sini...';
+    const lampiran = document.getElementById('pengumuman-lampiran').value;
+    const status = document.getElementById('pengumuman-status').value;
+    
+    // Update preview
+    document.getElementById('preview-judul').textContent = judul;
+    document.getElementById('preview-isi').textContent = isi;
+    document.getElementById('preview-tanggal').textContent = formatDate(tanggal);
+    
+    // Update badge
+    const badge = document.getElementById('preview-badge');
+    badge.textContent = jenis;
+    badge.style.background = getBadgeColor(jenis);
+    
+    // Update status
+    const statusBadge = document.getElementById('preview-status');
+    statusBadge.textContent = status === 'published' ? 'Published' : 'Draft';
+    statusBadge.className = `status-badge status-${status}`;
+    
+    // Update lampiran
+    const lampiranDiv = document.getElementById('preview-lampiran');
+    if (lampiran) {
+        lampiranDiv.innerHTML = `
+            <div class="announcement-attachment">
+                <i class="fas fa-paperclip"></i> <span>${lampiran}</span>
+            </div>
+        `;
+    } else {
+        lampiranDiv.innerHTML = '';
+    }
 }
 
-function validatePengumuman() {
-  let isValid = true;
-  
-  // Reset errors
-  ['judul-error', 'tanggal-error', 'isi-error'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-  });
-  
-  const judul = document.getElementById('pengumuman-judul').value.trim();
-  const tanggal = document.getElementById('pengumuman-tanggal').value;
-  const isi = document.getElementById('pengumuman-isi').value.trim();
-  
-  // Validasi judul
-  if (!judul) {
-    document.getElementById('judul-error').textContent = 'Judul harus diisi';
-    document.getElementById('judul-error').style.display = 'block';
-    document.getElementById('pengumuman-judul').classList.add('error');
-    isValid = false;
-  } else if (judul.length > 100) {
-    document.getElementById('judul-error').textContent = 'Judul maksimal 100 karakter';
-    document.getElementById('judul-error').style.display = 'block';
-    document.getElementById('pengumuman-judul').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('pengumuman-judul').classList.remove('error');
-  }
-  
-  // Validasi tanggal
-  if (!tanggal) {
-    document.getElementById('tanggal-error').textContent = 'Tanggal harus diisi';
-    document.getElementById('tanggal-error').style.display = 'block';
-    document.getElementById('pengumuman-tanggal').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('pengumuman-tanggal').classList.remove('error');
-  }
-  
-  // Validasi isi
-  if (!isi) {
-    document.getElementById('isi-error').textContent = 'Isi pengumuman harus diisi';
-    document.getElementById('isi-error').style.display = 'block';
-    document.getElementById('pengumuman-isi').classList.add('error');
-    isValid = false;
-  } else if (isi.length < 10) {
-    document.getElementById('isi-error').textContent = 'Isi pengumuman minimal 10 karakter';
-    document.getElementById('isi-error').style.display = 'block';
-    document.getElementById('pengumuman-isi').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('pengumuman-isi').classList.remove('error');
-  }
-  
-  return isValid;
-}
-
-function simpanPengumuman() {
-  if (!validatePengumuman()) return;
-  
-  const id = document.getElementById('edit-pengumuman-id').value;
-  const judul = document.getElementById('pengumuman-judul').value.trim();
-  const jenis = document.getElementById('pengumuman-jenis').value;
-  const tanggal = document.getElementById('pengumuman-tanggal').value;
-  const isi = document.getElementById('pengumuman-isi').value.trim();
-  const lampiran = document.getElementById('pengumuman-lampiran').value.trim();
-  const status = document.getElementById('pengumuman-status').value;
-  
-  if (id) {
-    // Edit existing
-    const index = osimData.pengumuman.findIndex(p => p.id == id);
-    if (index !== -1) {
-      osimData.pengumuman[index] = {
-        ...osimData.pengumuman[index],
+async function simpanPengumuman() {
+    if (!validatePengumuman()) return;
+    
+    const id = document.getElementById('edit-pengumuman-id').value;
+    const judul = document.getElementById('pengumuman-judul').value.trim();
+    const jenis = document.getElementById('pengumuman-jenis').value;
+    const tanggal = document.getElementById('pengumuman-tanggal').value;
+    const isi = document.getElementById('pengumuman-isi').value.trim();
+    const lampiran = document.getElementById('pengumuman-lampiran').value.trim();
+    const status = document.getElementById('pengumuman-status').value;
+    
+    const pengumumanData = {
         judul,
         jenis,
         tanggal,
         isi,
         lampiran: lampiran || null,
         status,
+        warna: getBadgeColor(jenis),
+        createdAt: id && id !== 'new' ? osimData.pengumuman.find(p => p.id === id)?.createdAt || new Date().toISOString() : new Date().toISOString(),
         updatedAt: new Date().toISOString()
-      };
-      showAlert('success', 'Pengumuman berhasil diperbarui!');
-    }
-    cancelEditPengumuman();
-  } else {
-    // Create new
-    const pengumuman = {
-      id: Date.now(),
-      judul,
-      jenis,
-      tanggal,
-      isi,
-      lampiran: lampiran || null,
-      status,
-      warna: getBadgeColor(jenis),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
     };
     
-    osimData.pengumuman.unshift(pengumuman);
-    showAlert('success', 'Pengumuman berhasil disimpan!');
-  }
-  
-  saveData();
-  clearPengumumanForm();
+    try {
+        const success = await saveData('pengumuman', { id: id || 'new', ...pengumumanData });
+        
+        if (success) {
+            showAlert('success', id ? 'Pengumuman berhasil diperbarui!' : 'Pengumuman berhasil disimpan!');
+            await loadData(); // Reload data dari Firebase
+            clearPengumumanForm();
+            cancelEditPengumuman();
+        }
+    } catch (error) {
+        console.error("Error saving pengumuman:", error);
+        showAlert('error', 'Gagal menyimpan pengumuman!');
+    }
+}
+
+async function editPengumuman(id) {
+    const pengumuman = osimData.pengumuman.find(p => p.id === id);
+    if (!pengumuman) return;
+    
+    // Fill form
+    document.getElementById('edit-pengumuman-id').value = id;
+    document.getElementById('pengumuman-judul').value = pengumuman.judul;
+    document.getElementById('pengumuman-jenis').value = pengumuman.jenis;
+    document.getElementById('pengumuman-tanggal').value = pengumuman.tanggal;
+    document.getElementById('pengumuman-isi').value = pengumuman.isi;
+    document.getElementById('pengumuman-lampiran').value = pengumuman.lampiran || '';
+    document.getElementById('pengumuman-status').value = pengumuman.status || 'published';
+    
+    // Update button
+    document.getElementById('simpan-pengumuman').innerHTML = '<i class="fas fa-save"></i> Update Pengumuman';
+    document.getElementById('cancel-edit').style.display = 'block';
+    
+    updatePreview();
+    showAlert('info', 'Edit mode aktif. Ubah data yang diperlukan.');
+}
+
+async function hapusPengumuman(id) {
+    if (confirm('Yakin hapus pengumuman ini?')) {
+        const success = await deleteData('pengumuman', id);
+        if (success) {
+            await loadData(); // Reload data dari Firebase
+            showAlert('success', 'Pengumuman berhasil dihapus!');
+        }
+    }
 }
 
 function renderPengumuman() {
-  const container = document.getElementById('daftar-pengumuman');
-  const searchTerm = document.getElementById('search-pengumuman').value.toLowerCase();
-  
-  let filtered = osimData.pengumuman;
-  
-  // Apply filter
-  if (currentFilter !== 'all') {
-    filtered = filtered.filter(p => p.status === currentFilter);
-  }
-  
-  // Apply search
-  if (searchTerm) {
-    filtered = filtered.filter(p => 
-      p.judul.toLowerCase().includes(searchTerm) || 
-      p.isi.toLowerCase().includes(searchTerm)
-    );
-  }
-  
-  if (filtered.length === 0) {
-    container.innerHTML = `
-      <div style="text-align: center; padding: 40px; opacity: 0.5;">
-        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px;"></i>
-        <p>Tidak ada pengumuman ditemukan</p>
-      </div>
-    `;
-    return;
-  }
-  
-  container.innerHTML = '';
-  filtered.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'announcement-card';
-    card.innerHTML = `
-      <div class="announcement-header">
-        <span class="announcement-badge" style="background: ${p.warna}">${p.jenis}</span>
-        <span class="announcement-date">${formatDate(p.tanggal)}</span>
-        <span class="status-badge status-${p.status}">${p.status === 'published' ? 'Published' : 'Draft'}</span>
-      </div>
-      <h3 class="announcement-title">${p.judul}</h3>
-      <p class="announcement-content">${p.isi.substring(0, 100)}${p.isi.length > 100 ? '...' : ''}</p>
-      ${p.lampiran ? `
-        <div class="announcement-footer">
-          <div class="announcement-attachment">
-            <i class="fas fa-paperclip"></i> <span>${p.lampiran}</span>
-          </div>
+    const container = document.getElementById('daftar-pengumuman');
+    let filtered = osimData.pengumuman;
+    
+    // Filter berdasarkan status
+    if (currentFilter !== 'all') {
+        filtered = filtered.filter(p => p.status === currentFilter);
+    }
+    
+    // Sort by tanggal descending
+    filtered.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+    
+    if (filtered.length === 0) {
+        container.innerHTML = '<p style="text-align: center; opacity: 0.7;">Belum ada pengumuman</p>';
+        return;
+    }
+    
+    container.innerHTML = filtered.map(p => `
+        <div class="announcement-card">
+            <div class="announcement-header">
+                <span class="announcement-badge" style="background: ${p.warna || '#1E40AF'}">${p.jenis}</span>
+                <span class="announcement-date">${formatDate(p.tanggal)}</span>
+                <span class="status-badge status-${p.status}">${p.status === 'published' ? 'Published' : 'Draft'}</span>
+            </div>
+            <h3 class="announcement-title">${p.judul}</h3>
+            <p class="announcement-content">${p.isi.length > 200 ? p.isi.substring(0, 200) + '...' : p.isi}</p>
+            <div class="announcement-footer">
+                <button class="btn btn-outline" onclick="editPengumuman('${p.id}')">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-danger" onclick="hapusPengumuman('${p.id}')">
+                    <i class="fas fa-trash"></i> Hapus
+                </button>
+            </div>
         </div>
-      ` : ''}
-      <div class="announcement-footer">
-        <button class="btn btn-warning" onclick="editPengumuman(${p.id})">
-          <i class="fas fa-edit"></i> Edit
-        </button>
-        <button class="btn btn-danger" onclick="hapusPengumuman(${p.id})">
-          <i class="fas fa-trash"></i> Hapus
-        </button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
+    `).join('');
 }
 
-function editPengumuman(id) {
-  const pengumuman = osimData.pengumuman.find(p => p.id === id);
-  if (!pengumuman) return;
-  
-  currentEditId = id;
-  
-  // Fill form
-  document.getElementById('edit-pengumuman-id').value = id;
-  document.getElementById('pengumuman-judul').value = pengumuman.judul;
-  document.getElementById('pengumuman-jenis').value = pengumuman.jenis;
-  document.getElementById('pengumuman-tanggal').value = pengumuman.tanggal;
-  document.getElementById('pengumuman-isi').value = pengumuman.isi;
-  document.getElementById('pengumuman-lampiran').value = pengumuman.lampiran || '';
-  document.getElementById('pengumuman-status').value = pengumuman.status || 'published';
-  
-  // Update button
-  document.getElementById('simpan-pengumuman').innerHTML = '<i class="fas fa-save"></i> Update Pengumuman';
-  document.getElementById('cancel-edit').style.display = 'block';
-  
-  updatePreview();
-  showAlert('info', 'Edit mode aktif. Ubah data yang diperlukan.');
+function validatePengumuman() {
+    let isValid = true;
+    
+    const judul = document.getElementById('pengumuman-judul').value.trim();
+    const tanggal = document.getElementById('pengumuman-tanggal').value;
+    const isi = document.getElementById('pengumuman-isi').value.trim();
+    
+    // Reset errors
+    document.getElementById('judul-error').style.display = 'none';
+    document.getElementById('tanggal-error').style.display = 'none';
+    document.getElementById('isi-error').style.display = 'none';
+    
+    if (!judul) {
+        document.getElementById('judul-error').textContent = 'Judul harus diisi';
+        document.getElementById('judul-error').style.display = 'block';
+        document.getElementById('pengumuman-judul').classList.add('error');
+        isValid = false;
+    }
+    
+    if (!tanggal) {
+        document.getElementById('tanggal-error').textContent = 'Tanggal harus diisi';
+        document.getElementById('tanggal-error').style.display = 'block';
+        document.getElementById('pengumuman-tanggal').classList.add('error');
+        isValid = false;
+    }
+    
+    if (!isi) {
+        document.getElementById('isi-error').textContent = 'Isi pengumuman harus diisi';
+        document.getElementById('isi-error').style.display = 'block';
+        document.getElementById('pengumuman-isi').classList.add('error');
+        isValid = false;
+    }
+    
+    return isValid;
 }
 
 function cancelEditPengumuman() {
-  currentEditId = null;
-  document.getElementById('edit-pengumuman-id').value = '';
-  document.getElementById('simpan-pengumuman').innerHTML = '<i class="fas fa-save"></i> Simpan Pengumuman';
-  document.getElementById('cancel-edit').style.display = 'none';
-  clearPengumumanForm();
+    document.getElementById('edit-pengumuman-id').value = '';
+    document.getElementById('simpan-pengumuman').innerHTML = '<i class="fas fa-save"></i> Simpan Pengumuman';
+    document.getElementById('cancel-edit').style.display = 'none';
+    clearPengumumanForm();
 }
 
 function filterPengumuman(filter) {
-  currentFilter = filter;
-  document.querySelectorAll('[onclick^="filterPengumuman"]').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  event.target.classList.add('active');
-  renderPengumuman();
-}
-
-function hapusPengumuman(id) {
-  if (confirm('Yakin hapus pengumuman ini?')) {
-    osimData.pengumuman = osimData.pengumuman.filter(p => p.id !== id);
-    saveData();
-  }
+    currentFilter = filter;
+    renderPengumuman();
+    
+    // Update active filter button
+    document.querySelectorAll('#daftar-pengumuman-section .btn-outline').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
 }
 
 function clearPengumumanForm() {
-  document.getElementById('edit-pengumuman-id').value = '';
-  document.getElementById('pengumuman-judul').value = '';
-  document.getElementById('pengumuman-isi').value = '';
-  document.getElementById('pengumuman-lampiran').value = '';
-  document.getElementById('pengumuman-tanggal').value = new Date().toISOString().split('T')[0];
-  document.getElementById('pengumuman-status').value = 'published';
-  document.getElementById('simpan-pengumuman').innerHTML = '<i class="fas fa-save"></i> Simpan Pengumuman';
-  document.getElementById('cancel-edit').style.display = 'none';
-  
-  // Reset errors
-  ['judul-error', 'tanggal-error', 'isi-error'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-    document.getElementById(id.replace('-error', '')).classList.remove('error');
-  });
-  
-  updatePreview();
+    document.getElementById('pengumuman-judul').value = '';
+    document.getElementById('pengumuman-tanggal').value = new Date().toISOString().split('T')[0];
+    document.getElementById('pengumuman-isi').value = '';
+    document.getElementById('pengumuman-lampiran').value = '';
+    document.getElementById('pengumuman-status').value = 'published';
+    document.getElementById('edit-pengumuman-id').value = '';
+    
+    // Remove error classes
+    document.querySelectorAll('.form-control.error').forEach(el => {
+        el.classList.remove('error');
+    });
+    
+    updatePreview();
 }
 
 // ==================== PROGRAM KERJA ====================
-function validateProker() {
-  let isValid = true;
-  
-  // Reset errors
-  ['proker-nama-error', 'proker-mulai-error', 'proker-deskripsi-error'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-  });
-  
-  const nama = document.getElementById('proker-nama').value.trim();
-  const mulai = document.getElementById('proker-mulai').value;
-  const deskripsi = document.getElementById('proker-deskripsi').value.trim();
-  
-  if (!nama) {
-    document.getElementById('proker-nama-error').textContent = 'Nama program harus diisi';
-    document.getElementById('proker-nama-error').style.display = 'block';
-    document.getElementById('proker-nama').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('proker-nama').classList.remove('error');
-  }
-  
-  if (!mulai) {
-    document.getElementById('proker-mulai-error').textContent = 'Tanggal mulai harus diisi';
-    document.getElementById('proker-mulai-error').style.display = 'block';
-    document.getElementById('proker-mulai').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('proker-mulai').classList.remove('error');
-  }
-  
-  if (!deskripsi) {
-    document.getElementById('proker-deskripsi-error').textContent = 'Deskripsi harus diisi';
-    document.getElementById('proker-deskripsi-error').style.display = 'block';
-    document.getElementById('proker-deskripsi').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('proker-deskripsi').classList.remove('error');
-  }
-  
-  return isValid;
-}
-
-function simpanProker() {
-  if (!validateProker()) return;
-  
-  const id = document.getElementById('edit-proker-id').value;
-  const proker = {
-    id: id || Date.now(),
-    nama: document.getElementById('proker-nama').value,
-    deskripsi: document.getElementById('proker-deskripsi').value,
-    status: document.getElementById('proker-status').value,
-    mulai: document.getElementById('proker-mulai').value,
-    selesai: document.getElementById('proker-selesai').value || null
-  };
-  
-  if (id) {
-    // Edit existing
-    const index = osimData.proker.findIndex(p => p.id == id);
-    if (index !== -1) {
-      osimData.proker[index] = proker;
+async function simpanProker() {
+    if (!validateProker()) return;
+    
+    const id = document.getElementById('edit-proker-id').value;
+    const prokerData = {
+        nama: document.getElementById('proker-nama').value,
+        deskripsi: document.getElementById('proker-deskripsi').value,
+        status: document.getElementById('proker-status').value,
+        mulai: document.getElementById('proker-mulai').value,
+        selesai: document.getElementById('proker-selesai').value || null,
+        updatedAt: new Date().toISOString()
+    };
+    
+    if (!id) {
+        prokerData.createdAt = new Date().toISOString();
     }
-    document.getElementById('edit-proker-id').value = '';
-    showAlert('success', 'Program kerja berhasil diperbarui!');
-  } else {
-    // Create new
-    osimData.proker.push(proker);
-    showAlert('success', 'Program kerja berhasil disimpan!');
-  }
-  
-  saveData();
-  clearProkerForm();
+    
+    try {
+        const success = await saveData('proker', { id: id || 'new', ...prokerData });
+        
+        if (success) {
+            showAlert('success', id ? 'Program kerja berhasil diperbarui!' : 'Program kerja berhasil disimpan!');
+            await loadData();
+            clearProkerForm();
+        }
+    } catch (error) {
+        console.error("Error saving proker:", error);
+        showAlert('error', 'Gagal menyimpan program kerja!');
+    }
 }
 
-function editProker(id) {
-  const proker = osimData.proker.find(p => p.id === id);
-  if (!proker) return;
-  
-  // Fill form
-  document.getElementById('edit-proker-id').value = id;
-  document.getElementById('proker-nama').value = proker.nama;
-  document.getElementById('proker-deskripsi').value = proker.deskripsi;
-  document.getElementById('proker-status').value = proker.status;
-  document.getElementById('proker-mulai').value = proker.mulai;
-  document.getElementById('proker-selesai').value = proker.selesai || '';
-  
-  showAlert('info', 'Edit mode aktif. Ubah data program kerja.');
+async function editProker(id) {
+    const proker = osimData.proker.find(p => p.id === id);
+    if (!proker) return;
+    
+    // Fill form
+    document.getElementById('edit-proker-id').value = id;
+    document.getElementById('proker-nama').value = proker.nama;
+    document.getElementById('proker-deskripsi').value = proker.deskripsi;
+    document.getElementById('proker-status').value = proker.status;
+    document.getElementById('proker-mulai').value = proker.mulai;
+    document.getElementById('proker-selesai').value = proker.selesai || '';
+    
+    // Update button
+    document.getElementById('simpan-proker').innerHTML = '<i class="fas fa-save"></i> Update Program Kerja';
+    showAlert('info', 'Edit mode aktif. Ubah data yang diperlukan.');
+}
+
+async function hapusProker(id) {
+    if (confirm('Yakin hapus program kerja ini?')) {
+        const success = await deleteData('proker', id);
+        if (success) {
+            await loadData();
+            showAlert('success', 'Program kerja berhasil dihapus!');
+        }
+    }
 }
 
 function renderProker() {
-  const container = document.getElementById('daftar-proker');
-  container.innerHTML = '';
-  
-  osimData.proker.forEach(p => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td><strong>${p.nama}</strong><br><small>${p.deskripsi.substring(0, 50)}...</small></td>
-      <td><span style="padding: 5px 10px; border-radius: 20px; background: ${getStatusColor(p.status)}; color: white; font-size: 0.8rem;">${p.status}</span></td>
-      <td>${formatDate(p.mulai)} ${p.selesai ? '- ' + formatDate(p.selesai) : ''}</td>
-      <td class="action-btns">
-        <button class="btn btn-warning" onclick="editProker(${p.id})">
-          <i class="fas fa-edit"></i> Edit
-        </button>
-        <button class="btn btn-danger" onclick="hapusProker(${p.id})">
-          <i class="fas fa-trash"></i> Hapus
-        </button>
-      </td>
-    `;
-    container.appendChild(row);
-  });
+    const tbody = document.getElementById('daftar-proker');
+    
+    if (osimData.proker.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; opacity: 0.7;">Belum ada program kerja</td></tr>';
+        return;
+    }
+    
+    tbody.innerHTML = osimData.proker.map(p => `
+        <tr>
+            <td><strong>${p.nama}</strong><br><small>${p.deskripsi.substring(0, 100)}...</small></td>
+            <td><span class="status-badge" style="background: ${getProkerStatusColor(p.status)}">${p.status}</span></td>
+            <td>${formatDate(p.mulai)} ${p.selesai ? ' - ' + formatDate(p.selesai) : ''}</td>
+            <td class="action-btns">
+                <button class="btn btn-outline" onclick="editProker('${p.id}')">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-danger" onclick="hapusProker('${p.id}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `).join('');
 }
 
-function hapusProker(id) {
-  if (confirm('Yakin hapus program kerja ini?')) {
-    osimData.proker = osimData.proker.filter(p => p.id !== id);
-    saveData();
-  }
+function validateProker() {
+    let isValid = true;
+    
+    const nama = document.getElementById('proker-nama').value.trim();
+    const mulai = document.getElementById('proker-mulai').value;
+    const deskripsi = document.getElementById('proker-deskripsi').value.trim();
+    
+    // Reset errors
+    document.getElementById('proker-nama-error').style.display = 'none';
+    document.getElementById('proker-mulai-error').style.display = 'none';
+    document.getElementById('proker-deskripsi-error').style.display = 'none';
+    
+    if (!nama) {
+        document.getElementById('proker-nama-error').textContent = 'Nama program harus diisi';
+        document.getElementById('proker-nama-error').style.display = 'block';
+        document.getElementById('proker-nama').classList.add('error');
+        isValid = false;
+    }
+    
+    if (!mulai) {
+        document.getElementById('proker-mulai-error').textContent = 'Tanggal mulai harus diisi';
+        document.getElementById('proker-mulai-error').style.display = 'block';
+        document.getElementById('proker-mulai').classList.add('error');
+        isValid = false;
+    }
+    
+    if (!deskripsi) {
+        document.getElementById('proker-deskripsi-error').textContent = 'Deskripsi harus diisi';
+        document.getElementById('proker-deskripsi-error').style.display = 'block';
+        document.getElementById('proker-deskripsi').classList.add('error');
+        isValid = false;
+    }
+    
+    return isValid;
 }
 
 function clearProkerForm() {
-  document.getElementById('edit-proker-id').value = '';
-  document.getElementById('proker-nama').value = '';
-  document.getElementById('proker-deskripsi').value = '';
-  document.getElementById('proker-mulai').value = new Date().toISOString().split('T')[0];
-  document.getElementById('proker-selesai').value = '';
-  
-  // Reset errors
-  ['proker-nama-error', 'proker-mulai-error', 'proker-deskripsi-error'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-    document.getElementById(id.replace('-error', '')).classList.remove('error');
-  });
+    document.getElementById('edit-proker-id').value = '';
+    document.getElementById('proker-nama').value = '';
+    document.getElementById('proker-deskripsi').value = '';
+    document.getElementById('proker-status').value = 'Perencanaan';
+    document.getElementById('proker-mulai').value = new Date().toISOString().split('T')[0];
+    document.getElementById('proker-selesai').value = '';
+    
+    // Remove error classes
+    document.querySelectorAll('.form-control.error').forEach(el => {
+        el.classList.remove('error');
+    });
+    
+    document.getElementById('simpan-proker').innerHTML = '<i class="fas fa-save"></i> Simpan Program Kerja';
+}
+
+function getProkerStatusColor(status) {
+    const colors = {
+        'Perencanaan': '#6B7280',
+        'Berjalan': '#1E40AF',
+        'Selesai': '#059669'
+    };
+    return colors[status] || '#6B7280';
 }
 
 // ==================== KEGIATAN ====================
-function validateKegiatan() {
-  let isValid = true;
-  
-  // Reset errors
-  ['kegiatan-nama-error', 'kegiatan-tanggal-error'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-  });
-  
-  const nama = document.getElementById('kegiatan-nama').value.trim();
-  const tanggal = document.getElementById('kegiatan-tanggal').value;
-  
-  if (!nama) {
-    document.getElementById('kegiatan-nama-error').textContent = 'Nama kegiatan harus diisi';
-    document.getElementById('kegiatan-nama-error').style.display = 'block';
-    document.getElementById('kegiatan-nama').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('kegiatan-nama').classList.remove('error');
-  }
-  
-  if (!tanggal) {
-    document.getElementById('kegiatan-tanggal-error').textContent = 'Tanggal harus diisi';
-    document.getElementById('kegiatan-tanggal-error').style.display = 'block';
-    document.getElementById('kegiatan-tanggal').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('kegiatan-tanggal').classList.remove('error');
-  }
-  
-  return isValid;
-}
-
-function simpanKegiatan() {
-  if (!validateKegiatan()) return;
-  
-  const id = document.getElementById('edit-kegiatan-id').value;
-  const kegiatan = {
-    id: id || Date.now(),
-    nama: document.getElementById('kegiatan-nama').value,
-    tanggal: document.getElementById('kegiatan-tanggal').value,
-    lokasi: document.getElementById('kegiatan-lokasi').value,
-    keterangan: document.getElementById('kegiatan-keterangan').value,
-    event: document.getElementById('kegiatan-event').checked
-  };
-  
-  if (id) {
-    // Edit existing
-    const index = osimData.kegiatan.findIndex(k => k.id == id);
-    if (index !== -1) {
-      osimData.kegiatan[index] = kegiatan;
+async function simpanKegiatan() {
+    if (!validateKegiatan()) return;
+    
+    const id = document.getElementById('edit-kegiatan-id').value;
+    const kegiatanData = {
+        nama: document.getElementById('kegiatan-nama').value,
+        tanggal: document.getElementById('kegiatan-tanggal').value,
+        lokasi: document.getElementById('kegiatan-lokasi').value,
+        keterangan: document.getElementById('kegiatan-keterangan').value,
+        event: document.getElementById('kegiatan-event').checked,
+        updatedAt: new Date().toISOString()
+    };
+    
+    if (!id) {
+        kegiatanData.createdAt = new Date().toISOString();
     }
-    document.getElementById('edit-kegiatan-id').value = '';
-    showAlert('success', 'Kegiatan berhasil diperbarui!');
-  } else {
-    // Create new
-    osimData.kegiatan.push(kegiatan);
-    showAlert('success', 'Kegiatan berhasil disimpan!');
-  }
-  
-  saveData();
-  clearKegiatanForm();
+    
+    try {
+        const success = await saveData('kegiatan', { id: id || 'new', ...kegiatanData });
+        
+        if (success) {
+            showAlert('success', id ? 'Kegiatan berhasil diperbarui!' : 'Kegiatan berhasil disimpan!');
+            await loadData();
+            clearKegiatanForm();
+        }
+    } catch (error) {
+        console.error("Error saving kegiatan:", error);
+        showAlert('error', 'Gagal menyimpan kegiatan!');
+    }
 }
 
-function editKegiatan(id) {
-  const kegiatan = osimData.kegiatan.find(k => k.id === id);
-  if (!kegiatan) return;
-  
-  // Fill form
-  document.getElementById('edit-kegiatan-id').value = id;
-  document.getElementById('kegiatan-nama').value = kegiatan.nama;
-  document.getElementById('kegiatan-tanggal').value = kegiatan.tanggal;
-  document.getElementById('kegiatan-lokasi').value = kegiatan.lokasi || '';
-  document.getElementById('kegiatan-keterangan').value = kegiatan.keterangan || '';
-  document.getElementById('kegiatan-event').checked = kegiatan.event || false;
-  
-  showAlert('info', 'Edit mode aktif. Ubah data kegiatan.');
+async function editKegiatan(id) {
+    const kegiatan = osimData.kegiatan.find(k => k.id === id);
+    if (!kegiatan) return;
+    
+    // Fill form
+    document.getElementById('edit-kegiatan-id').value = id;
+    document.getElementById('kegiatan-nama').value = kegiatan.nama;
+    document.getElementById('kegiatan-tanggal').value = kegiatan.tanggal;
+    document.getElementById('kegiatan-lokasi').value = kegiatan.lokasi || '';
+    document.getElementById('kegiatan-keterangan').value = kegiatan.keterangan || '';
+    document.getElementById('kegiatan-event').checked = kegiatan.event || false;
+    
+    // Update button
+    document.getElementById('simpan-kegiatan').innerHTML = '<i class="fas fa-save"></i> Update Kegiatan';
+    showAlert('info', 'Edit mode aktif. Ubah data yang diperlukan.');
+}
+
+async function hapusKegiatan(id) {
+    if (confirm('Yakin hapus kegiatan ini?')) {
+        const success = await deleteData('kegiatan', id);
+        if (success) {
+            await loadData();
+            showAlert('success', 'Kegiatan berhasil dihapus!');
+        }
+    }
 }
 
 function renderKegiatan() {
-  const container = document.getElementById('daftar-kegiatan');
-  container.innerHTML = '';
-  
-  // Sort by tanggal (descending)
-  const sortedKegiatan = [...osimData.kegiatan].sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
-  
-  sortedKegiatan.forEach(k => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td><strong>${k.nama}</strong><br><small>${k.keterangan?.substring(0, 50) || ''}...</small></td>
-      <td>${formatDate(k.tanggal)}</td>
-      <td>${k.lokasi || '-'}</td>
-      <td class="action-btns">
-        <button class="btn btn-warning" onclick="editKegiatan(${k.id})">
-          <i class="fas fa-edit"></i> Edit
-        </button>
-        <button class="btn btn-danger" onclick="hapusKegiatan(${k.id})">
-          <i class="fas fa-trash"></i> Hapus
-        </button>
-      </td>
-    `;
-    container.appendChild(row);
-  });
+    const tbody = document.getElementById('daftar-kegiatan');
+    
+    if (osimData.kegiatan.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; opacity: 0.7;">Belum ada kegiatan</td></tr>';
+        return;
+    }
+    
+    // Sort by tanggal descending
+    const sortedKegiatan = [...osimData.kegiatan].sort((a, b) => new Date(a.tanggal) - new Date(b.tanggal));
+    
+    tbody.innerHTML = sortedKegiatan.map(k => `
+        <tr>
+            <td><strong>${k.nama}</strong> ${k.event ? '<i class="fas fa-calendar-check" style="color: var(--success-color);"></i>' : ''}<br><small>${k.keterangan || ''}</small></td>
+            <td>${formatDate(k.tanggal)}</td>
+            <td>${k.lokasi || '-'}</td>
+            <td class="action-btns">
+                <button class="btn btn-outline" onclick="editKegiatan('${k.id}')">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-danger" onclick="hapusKegiatan('${k.id}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `).join('');
 }
 
-function hapusKegiatan(id) {
-  if (confirm('Yakin hapus kegiatan ini?')) {
-    osimData.kegiatan = osimData.kegiatan.filter(k => k.id !== id);
-    saveData();
-  }
+function validateKegiatan() {
+    let isValid = true;
+    
+    const nama = document.getElementById('kegiatan-nama').value.trim();
+    const tanggal = document.getElementById('kegiatan-tanggal').value;
+    
+    // Reset errors
+    document.getElementById('kegiatan-nama-error').style.display = 'none';
+    document.getElementById('kegiatan-tanggal-error').style.display = 'none';
+    
+    if (!nama) {
+        document.getElementById('kegiatan-nama-error').textContent = 'Nama kegiatan harus diisi';
+        document.getElementById('kegiatan-nama-error').style.display = 'block';
+        document.getElementById('kegiatan-nama').classList.add('error');
+        isValid = false;
+    }
+    
+    if (!tanggal) {
+        document.getElementById('kegiatan-tanggal-error').textContent = 'Tanggal harus diisi';
+        document.getElementById('kegiatan-tanggal-error').style.display = 'block';
+        document.getElementById('kegiatan-tanggal').classList.add('error');
+        isValid = false;
+    }
+    
+    return isValid;
 }
 
 function clearKegiatanForm() {
-  document.getElementById('edit-kegiatan-id').value = '';
-  document.getElementById('kegiatan-nama').value = '';
-  document.getElementById('kegiatan-tanggal').value = new Date().toISOString().split('T')[0];
-  document.getElementById('kegiatan-lokasi').value = '';
-  document.getElementById('kegiatan-keterangan').value = '';
-  document.getElementById('kegiatan-event').checked = false;
-  
-  // Reset errors
-  ['kegiatan-nama-error', 'kegiatan-tanggal-error'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-    document.getElementById(id.replace('-error', '')).classList.remove('error');
-  });
+    document.getElementById('edit-kegiatan-id').value = '';
+    document.getElementById('kegiatan-nama').value = '';
+    document.getElementById('kegiatan-tanggal').value = new Date().toISOString().split('T')[0];
+    document.getElementById('kegiatan-lokasi').value = '';
+    document.getElementById('kegiatan-keterangan').value = '';
+    document.getElementById('kegiatan-event').checked = false;
+    
+    // Remove error classes
+    document.querySelectorAll('.form-control.error').forEach(el => {
+        el.classList.remove('error');
+    });
+    
+    document.getElementById('simpan-kegiatan').innerHTML = '<i class="fas fa-save"></i> Simpan Kegiatan';
 }
 
 // ==================== GALERI ====================
-function tambahFoto() {
-  const album = document.getElementById('galeri-album').value || 'Umum';
-  const kategori = document.getElementById('galeri-kategori').value;
-  const link = document.getElementById('galeri-link').value;
-  const keterangan = document.getElementById('galeri-keterangan').value;
-  
-  if (!link) {
-    showAlert('error', 'Link foto harus diisi!');
-    return;
-  }
-  
-  const foto = {
-    id: Date.now(),
-    album,
-    kategori,
-    link,
-    keterangan: keterangan || null,
-    tanggal: new Date().toISOString().split('T')[0]
-  };
-  
-  osimData.galeri.push(foto);
-  saveData();
-  clearGaleriForm();
+async function tambahFoto() {
+    const album = document.getElementById('galeri-album').value.trim();
+    const kategori = document.getElementById('galeri-kategori').value;
+    const link = document.getElementById('galeri-link').value.trim();
+    const keterangan = document.getElementById('galeri-keterangan').value.trim();
+    
+    if (!album) {
+        showAlert('error', 'Nama album harus diisi!');
+        return;
+    }
+    
+    const galeriData = {
+        album,
+        kategori,
+        link: link || null,
+        keterangan: keterangan || null,
+        createdAt: new Date().toISOString()
+    };
+    
+    try {
+        const success = await saveData('galeri', { id: 'new', ...galeriData });
+        
+        if (success) {
+            showAlert('success', 'Foto berhasil ditambahkan ke galeri!');
+            await loadData();
+            clearGaleriForm();
+        }
+    } catch (error) {
+        console.error("Error saving galeri:", error);
+        showAlert('error', 'Gagal menambahkan foto!');
+    }
+}
+
+async function hapusFoto(id) {
+    if (confirm('Yakin hapus foto ini?')) {
+        const success = await deleteData('galeri', id);
+        if (success) {
+            await loadData();
+            showAlert('success', 'Foto berhasil dihapus!');
+        }
+    }
 }
 
 function renderGaleri() {
-  const container = document.getElementById('galeri-foto');
-  const searchTerm = document.getElementById('search-galeri').value.toLowerCase();
-  
-  let filtered = osimData.galeri;
-  
-  // Apply search
-  if (searchTerm) {
-    filtered = filtered.filter(g => 
-      (g.album && g.album.toLowerCase().includes(searchTerm)) ||
-      (g.keterangan && g.keterangan.toLowerCase().includes(searchTerm))
-    );
-  }
-  
-  container.innerHTML = '';
-  
-  if (filtered.length === 0) {
-    container.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 40px; opacity: 0.5;">
-        <i class="fas fa-images" style="font-size: 3rem; margin-bottom: 15px;"></i>
-        <p>Tidak ada foto ditemukan</p>
-      </div>
-    `;
-    return;
-  }
-  
-  filtered.forEach(g => {
-    const div = document.createElement('div');
-    div.className = 'gallery-item';
-    div.innerHTML = `
-      <img src="${g.link}" style="width: 100%; height: 100%; object-fit: cover;" 
-           onerror="this.onerror=null; this.src='https://via.placeholder.com/200x200?text=Foto'">
-      <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 5px; font-size: 0.8rem;">
-        ${g.album}
-      </div>
-      <button class="btn btn-danger" style="position: absolute; top: 5px; right: 5px; padding: 3px 8px; font-size: 0.7rem;" onclick="hapusFoto(${g.id})">
-        <i class="fas fa-trash"></i>
-      </button>
-    `;
-    container.appendChild(div);
-  });
-}
-
-function hapusFoto(id) {
-  if (confirm('Yakin hapus foto ini?')) {
-    osimData.galeri = osimData.galeri.filter(g => g.id !== id);
-    saveData();
-  }
+    const container = document.getElementById('galeri-foto');
+    
+    if (osimData.galeri.length === 0) {
+        container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; opacity: 0.7;">Belum ada foto di galeri</p>';
+        return;
+    }
+    
+    container.innerHTML = osimData.galeri.map(g => `
+        <div class="gallery-item">
+            <div style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem;">
+                ${g.kategori}
+            </div>
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 10px;">
+                <div style="font-size: 0.9rem;">${g.album}</div>
+                <div style="font-size: 0.7rem; opacity: 0.8; margin-top: 5px;">${formatDate(g.createdAt)}</div>
+                <div class="action-btns" style="margin-top: 10px;">
+                    <button class="btn btn-outline" style="padding: 3px 8px; font-size: 0.8rem;" onclick="hapusFoto('${g.id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
 }
 
 function clearGaleriForm() {
-  document.getElementById('galeri-album').value = '';
-  document.getElementById('galeri-link').value = '';
-  document.getElementById('galeri-keterangan').value = '';
-  document.getElementById('image-preview').style.display = 'none';
+    document.getElementById('galeri-album').value = '';
+    document.getElementById('galeri-link').value = '';
+    document.getElementById('galeri-keterangan').value = '';
+    document.getElementById('image-preview').style.display = 'none';
 }
 
 // ==================== PROFIL PENGURUS ====================
-function validateProfil() {
-  let isValid = true;
-  
-  // Reset errors
-  ['profil-nama-error', 'profil-jabatan-error'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-  });
-  
-  const nama = document.getElementById('profil-nama').value.trim();
-  const jabatan = document.getElementById('profil-jabatan').value.trim();
-  
-  if (!nama) {
-    document.getElementById('profil-nama-error').textContent = 'Nama harus diisi';
-    document.getElementById('profil-nama-error').style.display = 'block';
-    document.getElementById('profil-nama').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('profil-nama').classList.remove('error');
-  }
-  
-  if (!jabatan) {
-    document.getElementById('profil-jabatan-error').textContent = 'Jabatan harus diisi';
-    document.getElementById('profil-jabatan-error').style.display = 'block';
-    document.getElementById('profil-jabatan').classList.add('error');
-    isValid = false;
-  } else {
-    document.getElementById('profil-jabatan').classList.remove('error');
-  }
-  
-  return isValid;
-}
-
-function tambahPengurus() {
-  if (!validateProfil()) return;
-  
-  const id = document.getElementById('edit-profil-id').value;
-  const pengurus = {
-    id: id || Date.now(),
-    nama: document.getElementById('profil-nama').value,
-    jabatan: document.getElementById('profil-jabatan').value,
-    divisi: document.getElementById('profil-divisi').value,
-    foto: document.getElementById('profil-foto').value,
-    kontak: document.getElementById('profil-kontak').value || null
-  };
-  
-  if (id) {
-    // Edit existing
-    const index = osimData.profil.findIndex(p => p.id == id);
-    if (index !== -1) {
-      osimData.profil[index] = pengurus;
+async function tambahPengurus() {
+    if (!validateProfil()) return;
+    
+    const id = document.getElementById('edit-profil-id').value;
+    const profilData = {
+        nama: document.getElementById('profil-nama').value,
+        jabatan: document.getElementById('profil-jabatan').value,
+        divisi: document.getElementById('profil-divisi').value,
+        kontak: document.getElementById('profil-kontak').value.trim() || null,
+        foto: document.getElementById('profil-foto').value || null,
+        updatedAt: new Date().toISOString()
+    };
+    
+    if (!id) {
+        profilData.createdAt = new Date().toISOString();
     }
-    document.getElementById('edit-profil-id').value = '';
-    showAlert('success', 'Data pengurus berhasil diperbarui!');
-  } else {
-    // Create new
-    osimData.profil.push(pengurus);
-    showAlert('success', 'Data pengurus berhasil disimpan!');
-  }
-  
-  saveData();
-  clearProfilForm();
+    
+    try {
+        const success = await saveData('profil', { id: id || 'new', ...profilData });
+        
+        if (success) {
+            showAlert('success', id ? 'Data pengurus berhasil diperbarui!' : 'Data pengurus berhasil disimpan!');
+            await loadData();
+            clearProfilForm();
+        }
+    } catch (error) {
+        console.error("Error saving profil:", error);
+        showAlert('error', 'Gagal menyimpan data pengurus!');
+    }
 }
 
-function editProfil(id) {
-  const pengurus = osimData.profil.find(p => p.id === id);
-  if (!pengurus) return;
-  
-  // Fill form
-  document.getElementById('edit-profil-id').value = id;
-  document.getElementById('profil-nama').value = pengurus.nama;
-  document.getElementById('profil-jabatan').value = pengurus.jabatan;
-  document.getElementById('profil-divisi').value = pengurus.divisi;
-  document.getElementById('profil-foto').value = pengurus.foto || '';
-  document.getElementById('profil-kontak').value = pengurus.kontak || '';
-  
-  showAlert('info', 'Edit mode aktif. Ubah data pengurus.');
+async function editProfil(id) {
+    const profil = osimData.profil.find(p => p.id === id);
+    if (!profil) return;
+    
+    // Fill form
+    document.getElementById('edit-profil-id').value = id;
+    document.getElementById('profil-nama').value = profil.nama;
+    document.getElementById('profil-jabatan').value = profil.jabatan;
+    document.getElementById('profil-divisi').value = profil.divisi;
+    document.getElementById('profil-kontak').value = profil.kontak || '';
+    document.getElementById('profil-foto').value = profil.foto || '';
+    
+    // Update button
+    document.getElementById('tambah-pengurus').innerHTML = '<i class="fas fa-save"></i> Update Data Pengurus';
+    showAlert('info', 'Edit mode aktif. Ubah data yang diperlukan.');
+}
+
+async function hapusProfil(id) {
+    if (confirm('Yakin hapus data pengurus ini?')) {
+        const success = await deleteData('profil', id);
+        if (success) {
+            await loadData();
+            showAlert('success', 'Data pengurus berhasil dihapus!');
+        }
+    }
 }
 
 function renderProfil() {
-  const container = document.getElementById('daftar-pengurus');
-  
-  // Group by divisi
-  const byDivisi = {};
-  osimData.profil.forEach(p => {
-    if (!byDivisi[p.divisi]) byDivisi[p.divisi] = [];
-    byDivisi[p.divisi].push(p);
-  });
-  
-  container.innerHTML = '';
-  
-  for (const [divisi, list] of Object.entries(byDivisi)) {
-    const section = document.createElement('div');
-    section.style.marginBottom = '30px';
-    section.innerHTML = `<h3 style="margin-bottom: 15px; color: var(--accent-color);">${divisi}</h3>`;
+    const container = document.getElementById('daftar-pengurus');
     
-    list.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'profile-card';
-      card.innerHTML = `
-        <div class="profile-avatar">
-          ${p.foto ? 
-            `<img src="${p.foto}" style="width: 100%; height: 100%; border-radius: 50%;" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-user\\'></i>'">` : 
-            '<i class="fas fa-user"></i>'
-          }
-        </div>
-        <div style="flex: 1;">
-          <div style="font-weight: 600;">${p.nama}</div>
-          <div style="color: var(--accent-color); font-size: 0.9rem;">${p.jabatan}</div>
-          ${p.kontak ? `<div style="font-size: 0.8rem; opacity: 0.7;">${p.kontak}</div>` : ''}
-        </div>
-        <div>
-          <button class="btn btn-warning" onclick="editProfil(${p.id})" style="margin-right: 5px;">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="btn btn-danger" onclick="hapusPengurus(${p.id})">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      `;
-      section.appendChild(card);
+    if (osimData.profil.length === 0) {
+        container.innerHTML = '<p style="text-align: center; opacity: 0.7;">Belum ada data pengurus</p>';
+        return;
+    }
+    
+    // Group by divisi
+    const grouped = {};
+    osimData.profil.forEach(p => {
+        if (!grouped[p.divisi]) {
+            grouped[p.divisi] = [];
+        }
+        grouped[p.divisi].push(p);
     });
     
-    container.appendChild(section);
-  }
+    container.innerHTML = Object.entries(grouped).map(([divisi, profiles]) => `
+        <div style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 15px; color: var(--accent-color);">${divisi}</h3>
+            ${profiles.map(p => `
+                <div class="profile-card">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">${p.nama}</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">${p.jabatan}</div>
+                        ${p.kontak ? `<div style="font-size: 0.8rem; margin-top: 5px;"><i class="fas fa-envelope"></i> ${p.kontak}</div>` : ''}
+                    </div>
+                    <div class="action-btns">
+                        <button class="btn btn-outline" onclick="editProfil('${p.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" onclick="hapusProfil('${p.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `).join('');
 }
 
-function hapusPengurus(id) {
-  if (confirm('Yakin hapus data pengurus ini?')) {
-    osimData.profil = osimData.profil.filter(p => p.id !== id);
-    saveData();
-  }
+function validateProfil() {
+    let isValid = true;
+    
+    const nama = document.getElementById('profil-nama').value.trim();
+    const jabatan = document.getElementById('profil-jabatan').value.trim();
+    
+    // Reset errors
+    document.getElementById('profil-nama-error').style.display = 'none';
+    document.getElementById('profil-jabatan-error').style.display = 'none';
+    
+    if (!nama) {
+        document.getElementById('profil-nama-error').textContent = 'Nama harus diisi';
+        document.getElementById('profil-nama-error').style.display = 'block';
+        document.getElementById('profil-nama').classList.add('error');
+        isValid = false;
+    }
+    
+    if (!jabatan) {
+        document.getElementById('profil-jabatan-error').textContent = 'Jabatan harus diisi';
+        document.getElementById('profil-jabatan-error').style.display = 'block';
+        document.getElementById('profil-jabatan').classList.add('error');
+        isValid = false;
+    }
+    
+    return isValid;
 }
 
 function clearProfilForm() {
-  document.getElementById('edit-profil-id').value = '';
-  document.getElementById('profil-nama').value = '';
-  document.getElementById('profil-jabatan').value = '';
-  document.getElementById('profil-foto').value = '';
-  document.getElementById('profil-kontak').value = '';
-  document.getElementById('profil-file').value = '';
-  
-  // Reset errors
-  ['profil-nama-error', 'profil-jabatan-error'].forEach(id => {
-    document.getElementById(id).style.display = 'none';
-    document.getElementById(id.replace('-error', '')).classList.remove('error');
-  });
+    document.getElementById('edit-profil-id').value = '';
+    document.getElementById('profil-nama').value = '';
+    document.getElementById('profil-jabatan').value = '';
+    document.getElementById('profil-divisi').value = 'Pengurus Inti';
+    document.getElementById('profil-kontak').value = '';
+    document.getElementById('profil-foto').value = '';
+    document.getElementById('profil-file').value = '';
+    
+    // Remove error classes
+    document.querySelectorAll('.form-control.error').forEach(el => {
+        el.classList.remove('error');
+    });
+    
+    document.getElementById('tambah-pengurus').innerHTML = '<i class="fas fa-save"></i> Simpan Data Pengurus';
 }
 
 // ==================== UTILITY FUNCTIONS ====================
 function renderAll() {
-  renderPengumuman();
-  renderProker();
-  renderKegiatan();
-  renderGaleri();
-  renderProfil();
-  updatePreview();
+    renderPengumuman();
+    renderProker();
+    renderKegiatan();
+    renderGaleri();
+    renderProfil();
+    updatePreview();
+    updateDashboardStats();
 }
 
 function showAlert(type, message) {
-  const alert = document.getElementById('admin-alert');
-  alert.textContent = message;
-  alert.className = `alert alert-${type}`;
-  alert.style.display = 'block';
-  
-  setTimeout(() => {
-    alert.style.display = 'none';
-  }, 3000);
+    const alert = document.getElementById('admin-alert');
+    alert.textContent = message;
+    alert.className = `alert alert-${type}`;
+    alert.style.display = 'block';
+    
+    setTimeout(() => {
+        alert.style.display = 'none';
+    }, 3000);
 }
 
 function formatDate(dateString) {
-  if (!dateString) return 'Tanggal tidak ditentukan';
-  const date = new Date(dateString);
-  return date.toLocaleDateString('id-ID', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
+    if (!dateString) return 'Tanggal tidak ditentukan';
+    try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('id-ID', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    } catch (e) {
+        return dateString;
+    }
 }
 
 function getBadgeColor(jenis) {
-  const colors = {
-    'Penting': '#1E40AF',
-    'Info': '#059669',
-    'Darurat': '#DC2626',
-    'Acara': '#7C3AED'
-  };
-  return colors[jenis] || '#1E40AF';
-}
-
-function getStatusColor(status) {
-  const colors = {
-    'Perencanaan': '#F59E0B',
-    'Berjalan': '#1E40AF',
-    'Selesai': '#059669'
-  };
-  return colors[status] || '#1E40AF';
-}
-
-function updateCharCount() {
-  const text = document.getElementById('pengumuman-isi').value;
-  document.getElementById('char-count').textContent = text.length + ' karakter';
-}
-
-// ==================== FILE UPLOAD HANDLING ====================
-function handleFileUpload() {
-  const fileInput = document.getElementById('file-upload');
-  const file = fileInput.files[0];
-  
-  if (file) {
-    // Simulate upload and get URL
-    const fileName = file.name;
-    const fakeUrl = `https://example.com/uploads/${Date.now()}_${fileName}`;
-    document.getElementById('pengumuman-lampiran').value = fakeUrl;
-    showAlert('success', 'File berhasil diupload!');
-    updatePreview();
-  }
-}
-
-function handleGaleriUpload() {
-  const fileInput = document.getElementById('galeri-file');
-  const file = fileInput.files[0];
-  
-  if (file) {
-    // Preview image
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const preview = document.getElementById('image-preview');
-      preview.style.display = 'block';
-      document.getElementById('preview-image').src = e.target.result;
+    const colors = {
+        'Penting': '#1E40AF',
+        'Info': '#059669',
+        'Darurat': '#DC2626',
+        'Acara': '#7C3AED'
     };
-    reader.readAsDataURL(file);
-    
-    // Simulate upload and get URL
-    const fakeUrl = `https://example.com/galeri/${Date.now()}_${file.name}`;
-    document.getElementById('galeri-link').value = fakeUrl;
-  }
-}
-
-function handleProfilUpload() {
-  const fileInput = document.getElementById('profil-file');
-  const file = fileInput.files[0];
-  
-  if (file) {
-    // Simulate upload and get URL
-    const fakeUrl = `https://example.com/profil/${Date.now()}_${file.name}`;
-    document.getElementById('profil-foto').value = fakeUrl;
-    showAlert('success', 'Foto profil berhasil diupload!');
-  }
+    return colors[jenis] || '#1E40AF';
 }
 
 // ==================== INITIALIZE ====================
 document.addEventListener('DOMContentLoaded', function() {
-  // Load last login time
-  const lastLogin = localStorage.getItem('lastLogin');
-  if (lastLogin) {
-    const date = new Date(lastLogin);
-    document.getElementById('last-login').textContent = 'Last login: ' + date.toLocaleString('id-ID');
-  }
-  
-  // Set tanggal default
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('pengumuman-tanggal').value = today;
-  document.getElementById('proker-mulai').value = today;
-  document.getElementById('kegiatan-tanggal').value = today;
-  
-  // Update preview awal
-  updatePreview();
-  
-  // Inisialisasi Firebase
-  initializeFirebase();
-  
-  // Login button - gunakan login lokal sebagai fallback
-  document.getElementById('login-btn').addEventListener('click', function() {
-    // Coba Firebase dulu, jika error gunakan lokal
-    if (auth) {
-      loginFirebase();
-    } else {
-      loginLocal();
+    // Initialize Firebase
+    initializeFirebase();
+    
+    // Load last login time
+    const lastLogin = localStorage.getItem('lastLogin');
+    if (lastLogin) {
+        const date = new Date(lastLogin);
+        document.getElementById('last-login').textContent = 'Last login: ' + date.toLocaleString('id-ID');
     }
-  });
-  
-  document.getElementById('logout-btn').addEventListener('click', function(e) {
-    e.preventDefault();
-    logout();
-  });
-  
-  // Enter key untuk login
-  document.getElementById('password').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      if (auth) {
-        loginFirebase();
-      } else {
-        loginLocal();
-      }
-    }
-  });
-  
-  // Simpan buttons
-  document.getElementById('simpan-pengumuman').addEventListener('click', simpanPengumuman);
-  document.getElementById('simpan-proker').addEventListener('click', simpanProker);
-  document.getElementById('simpan-kegiatan').addEventListener('click', simpanKegiatan);
-  document.getElementById('tambah-foto').addEventListener('click', tambahFoto);
-  document.getElementById('tambah-pengurus').addEventListener('click', tambahPengurus);
-  
-  // Cancel edit
-  document.getElementById('cancel-edit').addEventListener('click', cancelEditPengumuman);
-  
-  // Menu navigation
-  document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', function() {
-      const section = this.getAttribute('data-section');
-      showSection(section);
-    });
-  });
-  
-  // Update preview saat form berubah
-  document.getElementById('pengumuman-judul').addEventListener('input', updatePreview);
-  document.getElementById('pengumuman-jenis').addEventListener('change', updatePreview);
-  document.getElementById('pengumuman-tanggal').addEventListener('change', updatePreview);
-  document.getElementById('pengumuman-isi').addEventListener('input', function() {
+    
+    // Set tanggal default
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('pengumuman-tanggal').value = today;
+    document.getElementById('proker-mulai').value = today;
+    document.getElementById('kegiatan-tanggal').value = today;
+    
+    // Update preview awal
     updatePreview();
-    updateCharCount();
-  });
-  document.getElementById('pengumuman-lampiran').addEventListener('input', updatePreview);
-  document.getElementById('pengumuman-status').addEventListener('change', updatePreview);
-  
-  // File upload handlers
-  document.getElementById('file-upload').addEventListener('change', handleFileUpload);
-  document.getElementById('galeri-file').addEventListener('change', handleGaleriUpload);
-  document.getElementById('profil-file').addEventListener('change', handleProfilUpload);
-  
-  // Search functionality
-  document.getElementById('search-pengumuman').addEventListener('input', renderPengumuman);
-  document.getElementById('search-galeri').addEventListener('input', renderGaleri);
-  
-  // Initialize char count
-  updateCharCount();
-  
-  // Auto login jika sudah login sebelumnya (localStorage)
-  const isLoggedIn = localStorage.getItem('lastLogin');
-  if (isLoggedIn && window.location.hash !== '#logout') {
-    // Cek jika Firebase auth ada user
-    if (auth && auth.currentUser) {
-      // Firebase user logged in
-      document.getElementById('login-page').style.display = 'none';
-      document.getElementById('admin-dashboard').style.display = 'flex';
-      loadData();
-      updateDashboardStats();
-    } else {
-      // Coba login lokal
-      document.getElementById('login-page').style.display = 'none';
-      document.getElementById('admin-dashboard').style.display = 'flex';
-      loadData();
-      updateDashboardStats();
-    }
-  }
-});
-</script>
- 
-</body></html>
+    
+    // Event Listeners
+    document.getElementById('login-btn').addEventListener('click', login);
+    
+    document.getElementById('password').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') login();
+    });
+    
+    document.getElementById('logout-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        logout();
+    });
+    
+    // Form input listeners untuk real-time preview
+    document.getElementById('pengumuman-judul').addEventListener('input', updatePreview);
+    document.getElementById('pengumuman-jenis').addEventListener('change', updatePreview);
+    document.getElementById('pengumuman-tanggal').addEventListener('change', updatePreview);
+    document.getElementById('pengumuman-isi').addEventListener('input', updatePreview);
+    document.getElementById('pengumuman-lampiran').addEventListener('input', updatePreview);
+    document.getElementById('pengumuman-status').addEventListener('change', updatePreview);
+    
+    // Karakter count
+    document.getElementById('pengumuman-isi').addEventListener('input', function() {
+        document.getElementById('char-count').textContent = this.value.length + ' karakter';
+    });
+    
+    // Simpan buttons
+    document.getElementById('simpan-pengumuman').addEventListener('click', simpanPengumuman);
+    document.getElementById('simpan-proker').addEventListener('click', simpanProker);
+    document.getElementById('simpan-kegiatan').addEventListener('click', simpanKegiatan);
+    document.getElementById('tambah-foto').addEventListener('click', tambahFoto);
+    document.getElementById('tambah-pengurus').addEventListener('click', tambahPengurus);
+    
+    // Cancel edit pengumuman
+    document.getElementById('cancel-edit').addEventListener('click', cancelEditPengumuman);
+    
+    // Search functionality
+    document.getElementById('search-pengumuman').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const announcements = document.querySelectorAll('#daftar-pengumuman .announcement-card');
         
-                
+        announcements.forEach(card => {
+            const title = card.querySelector('.announcement-title').textContent.toLowerCase();
+            const content = card.querySelector('.announcement-content').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+    
+    // Menu navigation
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const section = this.getAttribute('data-section');
+            showSection(section);
+        });
+    });
+    
+    // Image preview for galeri
+    document.getElementById('galeri-file').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview-image').src = e.target.result;
+                document.getElementById('image-preview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Auto login jika sudah login sebelumnya
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+        // Coba load data dari Firebase dulu
+        loadData().then(() => {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('admin-dashboard').style.display = 'flex';
+            updateDashboardStats();
+        }).catch(() => {
+            // Jika gagal, tampilkan login page
+            console.log("Gagal auto login");
+        });
+    }
+});
+  </script>
+</body>
+</html>
+ 
